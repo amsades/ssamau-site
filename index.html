@@ -370,6 +370,11 @@ nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.1);}
 .ev-panel{display:none}.ev-panel.ac{display:block}
 
 /* Past event cards */
+
+.pc-gallery-badge{position:absolute;bottom:.6rem;left:.6rem;background:rgba(0,0,0,.45);color:#fff;font-size:.6rem;font-weight:700;padding:.18rem .5rem;border-radius:50px;display:flex;align-items:center;gap:.25rem;}
+.past-card.has-gallery{cursor:pointer;}
+.past-card.has-gallery:hover .pc-hdr{filter:brightness(1.1);}
+
 .past-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-top:.5rem}
 .past-card{background:#fff;border-radius:var(--r);overflow:hidden;border:1px solid var(--bd);
   transition:all .22s;opacity:.75;filter:saturate(.55);}
@@ -803,13 +808,14 @@ nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.1);}
     <!-- Past panel -->
     <div class="ev-panel" id="ev-past">
       <div class="past-cards-grid">
-        <div class="past-card">
+        <div class="past-card has-gallery" onclick="openGallery('ftourna','فطورنا في ذكرى جذورنا','فبراير 2026 | 10 رمضان 1447هـ')">
           <div class="pc-hdr" style="background:#B8932A">
             <div class="pc-done" data-ar>✓ منتهية</div>
             <div class="pc-done" data-en style="display:none">✓ Completed</div>
             <div class="pc-date" data-ar>فبراير 2026 | 10 رمضان 1447هـ</div>
             <div class="pc-date" data-en style="display:none">Feb 2026 | 10 Ramadan 1447</div>
             <div class="pc-name" data-ar>فطورنا في ذكرى جذورنا</div>
+            <div class="pc-gallery-badge">📷 معرض الصور</div>
             <div class="pc-name" data-en style="display:none">Ftourna Bithikra Jdhoorna</div>
           </div>
           <div class="pc-body">
@@ -1922,7 +1928,14 @@ function cDrwD() {
 
     // الأرقام والبيانات من حقل notes (JSON)
     var stats = {};
-    try { stats = JSON.parse(p.notes || '{}'); } catch(e) {}
+    try {
+      var rawNotes = (p.notes || '').trim();
+      // Clean up common issues: remove BOM, extra whitespace, smart quotes
+      rawNotes = rawNotes.replace(/^[﻿]+/, '').replace(/[“”]/g, '"').replace(/[‘’]/g, "'");
+      if (rawNotes && rawNotes[0] === '{') {
+        stats = JSON.parse(rawNotes);
+      }
+    } catch(e) { console.warn('Notes parse error:', e.message, p.notes); }
 
     // بناء إحصائيات 6 خانات
     var statItems = [];
@@ -1950,6 +1963,11 @@ function cDrwD() {
 
     // حفظ بيانات المعرض
     var folderId = stats.gallery_folder || '';
+    // fallback: check raw notes for gallery_folder pattern
+    if (!folderId && p.notes && p.notes.indexOf('gallery_folder') !== -1) {
+      var m = p.notes.match(/"gallery_folder"\s*:\s*"([^"]+)"/);
+      if (m) folderId = m[1];
+    }
     var eventTitle = p.project_name || '';
     var eventDate = '';
     if (p.event_date) {
