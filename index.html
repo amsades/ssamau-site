@@ -431,6 +431,77 @@ nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.1);}
 .adv-section-lbl::before,.adv-section-lbl::after{
   content:"";flex:1;height:1px;background:rgba(184,147,42,.25);
 }
+
+/* ── RECENT EVENTS ── */
+#recent-events-section{background:#fff;border-top:1px solid var(--bd);}
+.latest-ev-wrap{margin-top:2rem;background:#fff;border-radius:var(--r);border:1.5px solid var(--bd);overflow:hidden;box-shadow:var(--shadow-md);}
+.latest-ev-top{background:linear-gradient(135deg,#0e3a1c 0%,#1A5C2E 100%);padding:1.5rem 2rem 1.2rem;}
+.latest-ev-eyebrow{display:flex;align-items:center;justify-content:flex-end;gap:.5rem;margin-bottom:.75rem;}
+.latest-ev-badge{font-size:.6rem;font-weight:800;padding:.2rem .65rem;border-radius:50px;letter-spacing:.05em;text-transform:uppercase;}
+.latest-ev-badge.ar{background:rgba(184,147,42,.25);color:var(--go);border:1px solid rgba(184,147,42,.35);}
+.latest-ev-badge.en{background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.15);}
+.latest-ev-title{font-size:1.55rem;font-weight:800;color:#fff;text-align:center;line-height:1.3;margin-bottom:.75rem;}
+.latest-ev-meta{display:flex;align-items:center;justify-content:center;gap:.6rem;flex-wrap:wrap;}
+.latest-ev-chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:50px;padding:.28rem .8rem;font-size:.72rem;color:#fff;display:flex;align-items:center;gap:.3rem;}
+.latest-ev-chip.gold{background:rgba(184,147,42,.18);border-color:rgba(184,147,42,.35);color:var(--go);}
+.latest-ev-date{font-size:.72rem;color:rgba(255,255,255,.55);text-align:center;margin-top:.55rem;}
+
+.latest-ev-stats{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--bd);}
+.latest-ev-stat{padding:.85rem .5rem;text-align:center;border-left:1px solid var(--bd);}
+.latest-ev-stat:nth-child(3n){border-left:none;}
+@media(max-width:480px){.latest-ev-stats{grid-template-columns:repeat(2,1fr);}.latest-ev-stat:nth-child(2n){border-left:none;}.latest-ev-stat:nth-child(3n){border-left:1px solid var(--bd);}.latest-ev-stat:nth-child(even){border-left:none!important;}}
+.latest-ev-stat-n{font-size:1.25rem;font-weight:800;color:var(--gd);}
+.latest-ev-stat-l{font-size:.6rem;color:var(--tm);font-weight:600;margin-top:.1rem;}
+
+.latest-ev-body{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+@media(max-width:700px){.latest-ev-body{grid-template-columns:1fr;}}
+.latest-ev-desc-col{padding:1.25rem 1.5rem;border-left:1px solid var(--bd);}
+.latest-ev-desc-text{font-size:.82rem;color:var(--tl);line-height:1.75;margin-bottom:.85rem;}
+.latest-ev-highlights{list-style:none;padding:0;margin:0;}
+.latest-ev-highlights li{font-size:.78rem;color:var(--tl);padding:.2rem 0;display:flex;align-items:flex-start;gap:.45rem;line-height:1.5;}
+.latest-ev-highlights li::before{content:"•";color:var(--g);font-weight:800;flex-shrink:0;margin-top:.05rem;}
+.latest-ev-rating-col{padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:center;}
+.latest-ev-rating-box{text-align:center;background:var(--gl);border-radius:var(--r);border:1.5px solid rgba(26,92,46,.12);padding:1.5rem 2rem;width:100%;}
+.latest-ev-rating-n{font-size:2.8rem;font-weight:800;color:var(--go);line-height:1;}
+.latest-ev-rating-denom{font-size:1rem;font-weight:600;color:var(--tm);}
+.latest-ev-stars{font-size:1.1rem;margin:.4rem 0;}
+.latest-ev-rating-l{font-size:.72rem;color:var(--tl);font-weight:600;}
+
+/* ── GALLERY MODAL ── */
+.gallery-modal{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s;}
+.gallery-modal.open{opacity:1;pointer-events:all;}
+.gallery-inner{width:100%;max-width:860px;display:flex;flex-direction:column;gap:.75rem;}
+.gallery-head{display:flex;align-items:center;justify-content:space-between;}
+.gallery-head-title{font-size:1rem;font-weight:800;color:#fff;}
+.gallery-head-sub{font-size:.7rem;color:rgba(255,255,255,.5);margin-top:.15rem;}
+.gallery-close{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;width:34px;height:34px;border-radius:50%;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0;}
+.gallery-close:hover{background:rgba(255,255,255,.25);}
+/* Slideshow */
+.gallery-slide-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#111;}
+.gallery-slide-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .6s ease;background:#111;}
+.gallery-slide-img.active{opacity:1;}
+.gallery-slide-img.prev{opacity:0;}
+.gallery-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-size:.85rem;}
+.gallery-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.15);color:#fff;width:38px;height:38px;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:2;}
+.gallery-nav:hover{background:rgba(0,0,0,.8);}
+.gallery-nav.prev{right:.75rem;}
+.gallery-nav.next{left:.75rem;}
+/* Dots */
+.gallery-dots{display:flex;align-items:center;justify-content:center;gap:.4rem;flex-wrap:wrap;max-height:28px;overflow:hidden;}
+.gallery-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:all .2s;flex-shrink:0;}
+.gallery-dot.active{background:#fff;transform:scale(1.25);}
+/* Counter & footer */
+.gallery-footer{display:flex;align-items:center;justify-content:space-between;}
+.gallery-counter{font-size:.72rem;color:rgba(255,255,255,.5);}
+.gallery-open-link{font-size:.72rem;font-weight:700;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:.3rem;text-decoration:none;}
+.gallery-open-link:hover{color:#fff;}
+/* Progress bar */
+.gallery-progress{height:2px;background:rgba(255,255,255,.15);border-radius:1px;overflow:hidden;margin-top:-.25rem;}
+.gallery-progress-fill{height:100%;background:var(--go);border-radius:1px;transition:width linear;}
+/* Card hint */
+.latest-ev-wrap{cursor:pointer;transition:box-shadow .2s;}
+.latest-ev-wrap:hover{box-shadow:0 8px 30px rgba(0,0,0,.15);}
+.gallery-trigger-hint{font-size:.68rem;color:rgba(255,255,255,.5);text-align:center;padding:.45rem;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;gap:.35rem;}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1G3RERMS3"></script>
@@ -1016,6 +1087,19 @@ nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.1);}
     </div>
 </div></section>
 
+
+<!-- RECENT EVENTS -->
+<section id="recent-events-section">
+  <div class="section-inner">
+    <div class="eyebrow">آخر الفعاليات | Recent Events</div>
+    <h2 class="section-title" data-ar>آخر فعالياتنا</h2>
+    <h2 class="section-title" data-en style="display:none">Our Recent Events</h2>
+    <p class="section-desc" data-ar>نظرة على أبرز الفعاليات التي نظّمها نادي الطلبة السعوديين في ملبورن مؤخراً</p>
+    <p class="section-desc" data-en style="display:none">A look at the latest events organised by Saudi Students Association in Melbourne</p>
+    <div class="latest-ev-wrap"></div>
+  </div>
+</section>
+
 <!-- MEMBERSHIP -->
 <section class="membership" id="membership">
   <div class="section-inner">
@@ -1368,6 +1452,142 @@ function cDrw(e){if(e.target===document.getElementById('drw')||e.target.classLis
 function cDrwD(){document.getElementById('drw').classList.remove('op');document.body.style.overflow='';}
 
 </script><script>
+
+// ── GALLERY SLIDESHOW ────────────────────────────────────────
+var _galImages = [], _galIdx = 0, _galTimer = null, _galInterval = 3500;
+
+function openGallery(folderId, title, dateStr) {
+  if (!folderId) return;
+  document.getElementById('gallery-title').textContent = title || 'معرض الصور';
+  document.getElementById('gallery-sub').textContent = dateStr || '';
+  document.getElementById('gallery-drive-link').href = 'https://drive.google.com/drive/folders/' + folderId;
+  document.getElementById('gallery-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  loadGalleryImages(folderId);
+}
+
+function loadGalleryImages(folderId) {
+  var wrap = document.getElementById('gallery-slide-wrap');
+  document.getElementById('gallery-loading').style.display = 'flex';
+  document.getElementById('gallery-dots').innerHTML = '';
+  document.getElementById('gallery-counter').textContent = '';
+  _galImages = [];
+  _galIdx = 0;
+
+  // استخدام Google Drive API لجلب الصور
+  var apiKey = 'AIzaSyCIZ6ou537jVHK7sXBazHyS44pjPoeaLHU'; // ← ضع API Key هنا
+  var url = 'https://www.googleapis.com/drive/v3/files?q=%27' + folderId + '%27+in+parents+and+mimeType+contains+%27image%27&fields=files(id,name)&orderBy=name&key=' + apiKey;
+
+  fetch(url)
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (!data.files || !data.files.length) {
+        // fallback: فتح Drive مباشرةً
+        document.getElementById('gallery-loading').textContent = '📷 اضغط لفتح الصور في Drive';
+        document.getElementById('gallery-loading').style.cursor = 'pointer';
+        document.getElementById('gallery-loading').onclick = function() {
+          window.open(document.getElementById('gallery-drive-link').href, '_blank');
+        };
+        return;
+      }
+      _galImages = data.files.map(function(f) {
+        return { id: f.id, name: f.name, url: 'https://lh3.googleusercontent.com/d/' + f.id };
+      });
+      buildSlideshow(wrap);
+    })
+    .catch(function() {
+      // بدون API key — عرض الصورة الأولى مباشرةً أو Drive
+      document.getElementById('gallery-loading').style.display = 'none';
+      // محاولة بديلة: عرض embed
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://drive.google.com/embeddedfolderview?id=' + folderId + '#grid';
+      iframe.style.cssText = 'width:100%;height:100%;border:none;';
+      wrap.appendChild(iframe);
+    });
+}
+
+function buildSlideshow(wrap) {
+  document.getElementById('gallery-loading').style.display = 'none';
+  // إزالة الصور القديمة
+  wrap.querySelectorAll('.gallery-slide-img').forEach(function(el) { el.remove(); });
+
+  // إنشاء عناصر الصور
+  _galImages.forEach(function(img, i) {
+    var el = document.createElement('img');
+    el.className = 'gallery-slide-img' + (i === 0 ? ' active' : '');
+    el.src = img.url;
+    el.alt = img.name;
+    el.loading = 'lazy';
+    el.onclick = function(e) { e.stopPropagation(); };
+    wrap.appendChild(el);
+  });
+
+  // نقاط التنقل
+  var dots = document.getElementById('gallery-dots');
+  dots.innerHTML = _galImages.slice(0, 30).map(function(_, i) {
+    return '<div class="gallery-dot' + (i===0?' active':'') + '" onclick="goToSlide(' + i + ')"></div>';
+  }).join('');
+
+  updateGalleryUI();
+  startAutoPlay();
+}
+
+function updateGalleryUI() {
+  var imgs = document.querySelectorAll('.gallery-slide-img');
+  imgs.forEach(function(el, i) { el.classList.toggle('active', i === _galIdx); });
+  var dots = document.querySelectorAll('.gallery-dot');
+  dots.forEach(function(d, i) { d.classList.toggle('active', i === _galIdx); });
+  document.getElementById('gallery-counter').textContent = (_galIdx + 1) + ' / ' + _galImages.length;
+  resetProgress();
+}
+
+function resetProgress() {
+  var fill = document.getElementById('gallery-progress');
+  fill.style.transition = 'none';
+  fill.style.width = '0%';
+  requestAnimationFrame(function() {
+    fill.style.transition = 'width ' + _galInterval + 'ms linear';
+    fill.style.width = '100%';
+  });
+}
+
+function goToSlide(idx) {
+  _galIdx = (idx + _galImages.length) % _galImages.length;
+  updateGalleryUI();
+  clearTimeout(_galTimer);
+  _galTimer = setTimeout(function() { galleryNav(1); }, _galInterval);
+}
+
+function galleryNav(dir) {
+  if (!_galImages.length) return;
+  goToSlide(_galIdx + dir);
+}
+
+function startAutoPlay() {
+  clearTimeout(_galTimer);
+  _galTimer = setTimeout(function() { galleryNav(1); }, _galInterval);
+}
+
+function closeGallery(e) {
+  if (e.target === document.getElementById('gallery-modal')) closeGalleryDirect();
+}
+function closeGalleryDirect() {
+  document.getElementById('gallery-modal').classList.remove('open');
+  document.body.style.overflow = '';
+  clearTimeout(_galTimer);
+  _galImages = []; _galIdx = 0;
+  var wrap = document.getElementById('gallery-slide-wrap');
+  wrap.querySelectorAll('.gallery-slide-img, iframe').forEach(function(el) { el.remove(); });
+  document.getElementById('gallery-loading').style.display = 'flex';
+  document.getElementById('gallery-loading').textContent = '⏳ جاري تحميل الصور...';
+  document.getElementById('gallery-dots').innerHTML = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeGalleryDirect();
+  if (e.key === 'ArrowLeft') galleryNav(1);
+  if (e.key === 'ArrowRight') galleryNav(-1);
+});
+
 // ── NAV SCROLL ──
 window.addEventListener('scroll', function() {
   var nav = document.getElementById('navbar');
@@ -1527,16 +1747,16 @@ function cDrwD() {
     var grid = document.querySelector('#tp-board .bgrid');
     if (!grid) return;
 
-    grid.innerHTML = board.map(function(m, i) {
-      var nm = m.preferred_name || m.full_name;
-      var ini = nm[0];
+    grid.innerHTML = board.map(function(m) {
+      var fullName = m.full_name || '';
+      var ini = fullName[0] || '?';
       var isF = m.gender === 'أنثى';
       var isP = m.club_role === 'President';
       return '<div class="bcard' + (isP ? ' pres' : '') + '">' +
         '<div class="bav' + (isF ? ' f' : '') + '">' + ini + '</div>' +
         '<div class="bnm">' +
-          '<span data-ar>' + m.full_name + '</span>' +
-          '<span data-en style="display:none">' + (m.preferred_name || m.full_name) + '</span>' +
+          '<span data-ar>' + fullName + '</span>' +
+          '<span data-en style="display:none">' + fullName + '</span>' +
         '</div>' +
         '<div class="brl">' +
           '<span data-ar>' + (roleAr[m.club_role] || m.club_role) + '</span>' +
@@ -1550,7 +1770,7 @@ function cDrwD() {
     // تحديث MBS_LIST للـ drawer
     window.MBS_LIST = members.map(function(m) {
       var com = committees.find(function(c) { return c.committee_id === m.committee_id; });
-      return { nm: m.preferred_name || m.full_name, cm: com ? com.committee_name : '', gender: m.gender };
+      return { nm: m.full_name, cm: com ? com.committee_name : '', gender: m.gender };
     });
 
     // تحديث أعداد الأعضاء في كروت اللجان
@@ -1573,12 +1793,12 @@ function cDrwD() {
       var viceMember = members.find(function(m) { return m.member_id === com.committee_vice_head_member_id; });
       var chdEl = card.querySelector('.chd');
       if (chdEl && headMember) {
-        chdEl.textContent = headMember.preferred_name || headMember.full_name;
+        chdEl.textContent = headMember.full_name;
         chdEl.style.color = 'var(--go)';
       }
       var cdepEl = card.querySelector('.cdep');
       if (cdepEl && viceMember) {
-        cdepEl.textContent = 'نائب: ' + (viceMember.preferred_name || viceMember.full_name);
+        cdepEl.textContent = 'نائب: ' + viceMember.full_name;
       }
 
       // تحديث COMS_DATA للـ drawer
@@ -1589,12 +1809,12 @@ function cDrwD() {
           var cEntry = window.COMS_DATA.find(function(x) { return x.id === match[1]; });
           if (cEntry) {
             if (headMember) {
-              cEntry.hAr = headMember.preferred_name || headMember.full_name;
-              cEntry.hEn = headMember.preferred_name || headMember.full_name;
+              cEntry.hAr = headMember.full_name;
+              cEntry.hEn = headMember.full_name;
             }
             if (viceMember) {
-              cEntry.depAr = viceMember.preferred_name || viceMember.full_name;
-              cEntry.depEn = viceMember.preferred_name || viceMember.full_name;
+              cEntry.depAr = viceMember.full_name;
+              cEntry.depEn = viceMember.full_name;
             }
           }
         }
@@ -1697,6 +1917,124 @@ function cDrwD() {
     }
   }
 
+
+  // ── آخر الفعاليات (قسم منفصل في الصفحة) ─────
+  function renderRecentEvents(projects, members) {
+    var section = document.getElementById('recent-events-section');
+    if (!section) return;
+    var now = new Date();
+    var recent = projects.filter(function(p) {
+      return p.project_status === 'Completed' || new Date(p.event_date) < now;
+    }).sort(function(a,b) {
+      return new Date(b.event_date) - new Date(a.event_date);
+    });
+    if (!recent.length) { section.style.display = 'none'; return; }
+    section.style.display = '';
+
+    var p = recent[0];
+    var wrap = section.querySelector('.latest-ev-wrap');
+    if (!wrap) return;
+
+    // تاريخ الفعالية
+    var d = p.event_date ? new Date(p.event_date) : null;
+    var dateAr = d ? d.toLocaleDateString('ar-SA', {day:'numeric', month:'long', year:'numeric'}) : '';
+    var dateHijri = p.hijri_date || '';
+
+    // مدير الفعالية
+    var mgrId = p.assigned_event_manager_member_id || p.assigned_project_manager_member_id;
+    var mgr = members && mgrId ? members.find(function(m) { return m.member_id === mgrId; }) : null;
+    var mgrName = mgr ? mgr.full_name : (p.manager_name || '');
+
+    // الأرقام والبيانات من حقل notes (JSON)
+    var stats = {};
+    try { stats = JSON.parse(p.notes || '{}'); } catch(e) {}
+
+    // بناء إحصائيات 6 خانات
+    var statItems = [];
+    if (stats.interested)  statItems.push({n: stats.interested,  l: 'مهتم بالحضور'});
+    if (stats.tickets)     statItems.push({n: stats.tickets,     l: 'تذكرة (نُفذت)'});
+    if (stats.attendance)  statItems.push({n: stats.attendance,  l: 'الحضور الفعلي'});
+    if (stats.org_rating)  statItems.push({n: stats.org_rating,  l: 'تقييم فريق التنظيم'});
+    if (stats.committees)  statItems.push({n: stats.committees,  l: 'لجان مشاركة'});
+    if (stats.volunteers)  statItems.push({n: stats.volunteers,  l: 'متطوع'});
+
+    // النقاط المميزة
+    var highlights = stats.highlights || [];
+    var hlHTML = highlights.length
+      ? '<ul class="latest-ev-highlights">' + highlights.map(function(h) {
+          return '<li>' + h + '</li>';
+        }).join('') + '</ul>'
+      : '';
+
+    // النجوم
+    var rating = parseFloat(stats.rating || 0);
+    var stars = '';
+    for (var i = 1; i <= 5; i++) {
+      stars += i <= Math.round(rating) ? '★' : '☆';
+    }
+
+    // حفظ بيانات المعرض
+    var folderId = stats.gallery_folder || '';
+    var eventTitle = p.project_name || '';
+    var eventDate = '';
+    if (p.event_date) {
+      var dd = new Date(p.event_date);
+      eventDate = dd.toLocaleDateString('ar-SA', {day:'numeric', month:'long', year:'numeric'});
+      if (stats.hijri_date) eventDate += ' | ' + stats.hijri_date;
+    }
+    if (folderId) {
+      wrap.style.cursor = 'pointer';
+      wrap.onclick = function() { openGallery(folderId, eventTitle, eventDate); };
+    } else {
+      wrap.style.cursor = 'default';
+      wrap.onclick = null;
+    }
+
+    wrap.innerHTML =
+      // ── الرأس ──
+      '<div class="latest-ev-top">' +
+        '<div class="latest-ev-eyebrow">' +
+          '<span class="latest-ev-badge ar">آخر فعالياتنا</span>' +
+          '<span class="latest-ev-badge en">LATEST EVENT</span>' +
+        '</div>' +
+        '<div class="latest-ev-title">' + (p.project_name || '') + '</div>' +
+        '<div class="latest-ev-meta">' +
+          (mgrName ? '<div class="latest-ev-chip gold">★ مديرة الفعالية: ' + mgrName + '</div>' : '') +
+          (stats.quality_team ? '<div class="latest-ev-chip">📊 ' + stats.quality_team + '</div>' : '') +
+        '</div>' +
+        '<div class="latest-ev-date" data-ar>' + dateAr + (dateHijri ? ' | ' + dateHijri : '') + '</div>' +
+      '</div>' +
+
+      // ── الإحصائيات ──
+      (statItems.length ? '<div class="latest-ev-stats">' +
+        statItems.map(function(s) {
+          return '<div class="latest-ev-stat">' +
+            '<div class="latest-ev-stat-n">' + s.n + '</div>' +
+            '<div class="latest-ev-stat-l" data-ar>' + s.l + '</div>' +
+          '</div>';
+        }).join('') +
+      '</div>' : '') +
+
+      // ── الجسم ──
+      '<div class="latest-ev-body">' +
+        '<div class="latest-ev-desc-col">' +
+          (stats.description ? '<div class="latest-ev-desc-text" data-ar>' + stats.description + '</div>' : '') +
+          hlHTML +
+        '</div>' +
+        (rating ? '<div class="latest-ev-rating-col">' +
+          '<div class="latest-ev-rating-box">' +
+            '<div>' +
+              '<span class="latest-ev-rating-n">' + rating.toFixed(2) + '</span>' +
+              '<span class="latest-ev-rating-denom">/5</span>' +
+            '</div>' +
+            '<div class="latest-ev-stars" style="color:var(--go)">' + stars + '</div>' +
+            '<div class="latest-ev-rating-l" data-ar>معدل رضا المشاركين الإجمالي</div>' +
+          '</div>' +
+        '</div>' : '') +
+      '</div>' +
+      (folderId ? '<div class="gallery-trigger-hint" data-ar>📷 اضغط لعرض معرض الصور</div>' : '');
+  }
+
   // ── تحميل البيانات ──────────────────────────
   window.addEventListener('load', function() {
     // تحميل البيانات بشكل متوازٍ
@@ -1720,6 +2058,7 @@ function cDrwD() {
       if (members.length && committees.length) updateCommittees(members, committees);
       if (advisors.length)   updateAdvisors(advisors);
       if (projects.length)   updateEvents(projects);
+      if (projects.length)   renderRecentEvents(projects, members);
 
     }).catch(function(e) {
       console.warn('SSAM API: falling back to static data', e);
@@ -1728,5 +2067,30 @@ function cDrwD() {
 
 })();
 </script>
+
+<!-- GALLERY MODAL -->
+<div class="gallery-modal" id="gallery-modal" onclick="closeGallery(event)">
+  <div class="gallery-inner">
+    <div class="gallery-head">
+      <div>
+        <div class="gallery-head-title" id="gallery-title">معرض الصور</div>
+        <div class="gallery-head-sub" id="gallery-sub"></div>
+      </div>
+      <button class="gallery-close" onclick="closeGalleryDirect()">✕</button>
+    </div>
+    <div class="gallery-slide-wrap" id="gallery-slide-wrap">
+      <div class="gallery-loading" id="gallery-loading">⏳ جاري تحميل الصور...</div>
+      <button class="gallery-nav prev" id="gallery-prev" onclick="galleryNav(-1)">›</button>
+      <button class="gallery-nav next" id="gallery-next" onclick="galleryNav(1)">‹</button>
+    </div>
+    <div class="gallery-progress"><div class="gallery-progress-fill" id="gallery-progress"></div></div>
+    <div class="gallery-dots" id="gallery-dots"></div>
+    <div class="gallery-footer">
+      <div class="gallery-counter" id="gallery-counter"></div>
+      <a class="gallery-open-link" id="gallery-drive-link" href="#" target="_blank">🔗 فتح في Google Drive</a>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
