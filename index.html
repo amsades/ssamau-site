@@ -1469,41 +1469,55 @@ function openGallery(folderId, title, dateStr) {
 function loadGalleryImages(folderId) {
   var wrap = document.getElementById('gallery-slide-wrap');
   document.getElementById('gallery-loading').style.display = 'flex';
+  document.getElementById('gallery-loading').textContent = '⏳ جاري تحميل الصور...';
   document.getElementById('gallery-dots').innerHTML = '';
   document.getElementById('gallery-counter').textContent = '';
   _galImages = [];
   _galIdx = 0;
 
-  // استخدام Google Drive API لجلب الصور
-  var apiKey = 'AIzaSyCIZ6ou537jVHK7sXBazHyS44pjPoeaLHU'; // ← ضع API Key هنا
-  var url = 'https://www.googleapis.com/drive/v3/files?q=%27' + folderId + '%27+in+parents+and+mimeType+contains+%27image%27&fields=files(id,name)&orderBy=name&key=' + apiKey;
+  var apiKey = 'AIzaSyCIZ6ou537jVHK7sXBazHyS44pjPoeaLHU';
+  var url = 'https://www.googleapis.com/drive/v3/files'
+    + '?q=' + encodeURIComponent("'" + folderId + "' in parents and mimeType contains 'image/' and trashed=false")
+    + '&fields=files(id,name)'
+    + '&orderBy=name'
+    + '&pageSize=50'
+    + '&key=' + apiKey;
 
   fetch(url)
     .then(function(r) { return r.json(); })
     .then(function(data) {
-      if (!data.files || !data.files.length) {
-        // fallback: فتح Drive مباشرةً
-        document.getElementById('gallery-loading').textContent = '📷 اضغط لفتح الصور في Drive';
-        document.getElementById('gallery-loading').style.cursor = 'pointer';
-        document.getElementById('gallery-loading').onclick = function() {
-          window.open(document.getElementById('gallery-drive-link').href, '_blank');
-        };
+      if (data.error || !data.files || !data.files.length) {
+        showGalleryFallback(folderId, wrap);
         return;
       }
       _galImages = data.files.map(function(f) {
-        return { id: f.id, name: f.name, url: 'https://lh3.googleusercontent.com/d/' + f.id };
+        return {
+          id: f.id,
+          name: f.name,
+          url: 'https://drive.google.com/thumbnail?id=' + f.id + '&sz=w1200'
+        };
       });
       buildSlideshow(wrap);
     })
     .catch(function() {
-      // بدون API key — عرض الصورة الأولى مباشرةً أو Drive
-      document.getElementById('gallery-loading').style.display = 'none';
-      // محاولة بديلة: عرض embed
-      var iframe = document.createElement('iframe');
-      iframe.src = 'https://drive.google.com/embeddedfolderview?id=' + folderId + '#grid';
-      iframe.style.cssText = 'width:100%;height:100%;border:none;';
-      wrap.appendChild(iframe);
+      showGalleryFallback(folderId, wrap);
     });
+}
+
+function showGalleryFallback(folderId, wrap) {
+  document.getElementById('gallery-loading').style.display = 'none';
+  wrap.querySelectorAll('iframe').forEach(function(el) { el.remove(); });
+  var iframe = document.createElement('iframe');
+  iframe.src = 'https://drive.google.com/embeddedfolderview?id=' + folderId + '#grid';
+  iframe.style.cssText = 'width:100%;height:100%;border:none;min-height:460px;';
+  iframe.title = 'معرض الصور';
+  wrap.style.aspectRatio = 'unset';
+  wrap.style.minHeight = '460px';
+  wrap.appendChild(iframe);
+  document.getElementById('gallery-progress').parentElement.style.display = 'none';
+  document.getElementById('gallery-dots').style.display = 'none';
+  document.getElementById('gallery-prev').style.display = 'none';
+  document.getElementById('gallery-next').style.display = 'none';
 }
 
 function buildSlideshow(wrap) {
@@ -1893,14 +1907,20 @@ function cDrwD() {
       }
     }
 
-    // تحديث الفعاليات المنتهية
+    // الفعاليات المنتهية: أضف فعاليات الـ Sheet للأمام (دون حذف الثابتة)
     if (past.length) {
       var pastGrid = document.querySelector('#ev-past .past-cards-grid');
       if (pastGrid) {
-        pastGrid.innerHTML = past.map(function(p) {
+        var newCards = past.map(function(p) {
           var d = p.event_date ? new Date(p.event_date) : null;
           var dateAr = d ? d.toLocaleDateString('ar-SA', {month:'long', year:'numeric'}) : '';
-          return '<div class="past-card">' +
+          var pStats = {};
+          try { pStats = JSON.parse(p.notes || '{}'); } catch(e) {}
+          var galleryId = pStats.gallery_folder || '';
+          var clickAttr = galleryId
+            ? ' style="cursor:pointer" onclick="openGallery('' + galleryId + '','' + (p.project_name||'').replace(/'/g,"\'") + '','' + dateAr + '')"'
+            : '';
+          return '<div class="past-card"' + clickAttr + '>' +
             '<div class="pc-hdr" style="background:#2A7D42">' +
               '<div class="pc-done" data-ar>✓ منتهية</div>' +
               '<div class="pc-date" data-ar>' + dateAr + '</div>' +
@@ -1909,10 +1929,13 @@ function cDrwD() {
             '<div class="pc-body">' +
               '<div class="pc-row">' +
                 '<div class="pc-loc"><span class="pc-loc-ic">📍</span>' + (p.location || 'Melbourne') + '</div>' +
-                '<span class="pc-tag" style="background:#2A7D4222;color:#2A7D42" data-ar>' + (p.project_type || 'فعالية') + '</span>' +
+                '<span class="pc-tag" style="background:#2A7D4222;color:#2A7D42" data-ar>' + (p.project_type || 'فعالية') + (galleryId ? ' 📷' : '') + '</span>' +
               '</div>' +
+              (pStats.attendance ? '<div style="font-size:.75rem;font-weight:700;color:var(--g);margin-top:.4rem">👥 ' + pStats.attendance + ' حضور</div>' : '') +
             '</div></div>';
         }).join('');
+        // أضف الكروت الجديدة في البداية دون حذف الموجودة
+        pastGrid.insertAdjacentHTML('afterbegin', newCards);
       }
     }
   }
