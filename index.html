@@ -1215,7 +1215,7 @@ nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.1);}
 
   <div class="tpnl" id="tp-adv">
     <div class="adv-intro" data-ar>
-      يضم مجلس المستشارين نخبةً من أصحاب الخبرة والعطاء، ممن أمضوا سنواتٍ طويلة في الغربة — بعضهم تجاوزت إقامته أو ابتعاثه العشر سنوات — وخاضوا تجربة الغربة بكل ما تحمله من تحديات وفرص. أسهموا في مبادرات طلابية ومجتمعية، وقدّموا من وقتهم وجهدهم تطوعاً خالصاً. يمدّون النادي بتوجيهاتهم ونصائحهم المستندة إلى خبرة حقيقية، بما يخدم الطلاب السعوديين ويرسّخ مسيرة النادي.
+      يضم مجلس المستشارين نخبةً من أصحاب الخبرة والعطاء، ممن أمضوا سنواتٍ طويلة في أستراليا — بعضهم تجاوزت إقامته أو ابتعاثه العشر سنوات — وخاضوا تجربة الغربة بكل ما تحمله من تحديات وفرص. أسهموا في مبادرات طلابية ومجتمعية، وقدّموا من وقتهم وجهدهم تطوعاً خالصاً. يمدّون النادي بتوجيهاتهم ونصائحهم المستندة إلى خبرة حقيقية، بما يخدم الطلاب السعوديين ويرسّخ مسيرة النادي.
     </div>
     <div class="adv-intro" data-en style="display:none">
       The Advisory Council brings together distinguished individuals of proven experience and community commitment — several of whom have lived or studied in Australia for over a decade. Their journeys abroad shaped a deep understanding of the challenges and opportunities facing Saudi students. Volunteering their time and expertise, they guide the club with practical wisdom grounded in lived experience, in service of students and the club's continued growth.
@@ -1251,7 +1251,7 @@ nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.1);}
           <div class="adv-card">
             <div class="adv-av">ع</div>
             <div>
-              <div class="adv-name" data-ar>علي الشاردي</div>
+              <div class="adv-name" data-ar>علي الشارذي</div>
               <div class="adv-name" data-en style="display:none">Ali Al-Sharidi</div>
               <div class="adv-role" data-ar>مستشار النادي</div>
               <div class="adv-role" data-en style="display:none">Club Advisor</div>
@@ -1495,6 +1495,238 @@ function cDrwD() {
   document.getElementById('drw').classList.remove('op');
   document.body.style.overflow = '';
 }
+</script>
+
+<!-- ═══════════════════════════════════════════
+     SSAM API INTEGRATION — ربط البيانات الحي
+     ═══════════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  var API = 'https://script.google.com/macros/s/AKfycbyypS95CxsnYgC1EjX2N_h7tZSsvHxoJ2-iDUaJysQWjLWYpxJQxVq3yS1zpvWZdtgg/exec';
+
+  function apiGet(action, params) {
+    var url = API + '?action=' + action;
+    if (params) {
+      Object.keys(params).forEach(function(k) { url += '&' + k + '=' + encodeURIComponent(params[k]); });
+    }
+    return fetch(url).then(function(r) { return r.json(); }).catch(function() { return null; });
+  }
+
+  // ── تحديث مجلس الإدارة ──────────────────────
+  function updateBoard(members) {
+    var roles = ['President','Vice President','Deputy Vice President'];
+    var icons = { 'President': '🌿', 'Vice President': '🌿', 'Deputy Vice President': '🌿' };
+    var roleAr = { 'President': 'رئيس النادي السعودي في ملبورن', 'Vice President': 'نائب الرئيس', 'Deputy Vice President': 'نائبة الرئيس' };
+    var roleEn = { 'President': 'President of SSAM', 'Vice President': 'Vice President', 'Deputy Vice President': 'Deputy VP' };
+
+    var board = members.filter(function(m) { return roles.indexOf(m.club_role) !== -1; });
+    if (!board.length) return;
+
+    var grid = document.querySelector('#tp-board .bgrid');
+    if (!grid) return;
+
+    grid.innerHTML = board.map(function(m, i) {
+      var nm = m.preferred_name || m.full_name;
+      var ini = nm[0];
+      var isF = m.gender === 'أنثى';
+      var isP = m.club_role === 'President';
+      return '<div class="bcard' + (isP ? ' pres' : '') + '">' +
+        '<div class="bav' + (isF ? ' f' : '') + '">' + ini + '</div>' +
+        '<div class="bnm">' +
+          '<span data-ar>' + m.full_name + '</span>' +
+          '<span data-en style="display:none">' + (m.preferred_name || m.full_name) + '</span>' +
+        '</div>' +
+        '<div class="brl">' +
+          '<span data-ar>' + (roleAr[m.club_role] || m.club_role) + '</span>' +
+          '<span data-en style="display:none">' + (roleEn[m.club_role] || m.club_role) + '</span>' +
+        '</div></div>';
+    }).join('');
+  }
+
+  // ── تحديث اللجان ────────────────────────────
+  function updateCommittees(members, committees) {
+    // تحديث MBS_LIST للـ drawer
+    window.MBS_LIST = members.map(function(m) {
+      var com = committees.find(function(c) { return c.committee_id === m.committee_id; });
+      return { nm: m.preferred_name || m.full_name, cm: com ? com.committee_name : '', gender: m.gender };
+    });
+
+    // تحديث أعداد الأعضاء في كروت اللجان
+    document.querySelectorAll('.ccard').forEach(function(card) {
+      var comNameEl = card.querySelector('.cnm [data-ar]');
+      if (!comNameEl) return;
+      var comName = comNameEl.textContent.trim();
+      var com = committees.find(function(c) { return c.committee_name === comName; });
+      if (!com) return;
+
+      // عدد الأعضاء
+      var count = members.filter(function(m) { return m.committee_id === com.committee_id; }).length;
+      var cct = card.querySelector('.cct [data-ar]');
+      if (cct) cct.textContent = count + ' عضو';
+      var cctEn = card.querySelector('.cct [data-en]');
+      if (cctEn) cctEn.textContent = count + ' members';
+
+      // رئيس اللجنة
+      var headMember = members.find(function(m) { return m.member_id === com.committee_head_member_id; });
+      var viceMember = members.find(function(m) { return m.member_id === com.committee_vice_head_member_id; });
+      var chdEl = card.querySelector('.chd');
+      if (chdEl && headMember) {
+        chdEl.textContent = headMember.preferred_name || headMember.full_name;
+        chdEl.style.color = 'var(--go)';
+      }
+      var cdepEl = card.querySelector('.cdep');
+      if (cdepEl && viceMember) {
+        cdepEl.textContent = 'نائب: ' + (viceMember.preferred_name || viceMember.full_name);
+      }
+
+      // تحديث COMS_DATA للـ drawer
+      var cid = card.getAttribute('onclick');
+      if (cid) {
+        var match = cid.match(/oDrw\('([^']+)'\)/);
+        if (match) {
+          var cEntry = window.COMS_DATA.find(function(x) { return x.id === match[1]; });
+          if (cEntry) {
+            if (headMember) {
+              cEntry.hAr = headMember.preferred_name || headMember.full_name;
+              cEntry.hEn = headMember.preferred_name || headMember.full_name;
+            }
+            if (viceMember) {
+              cEntry.depAr = viceMember.preferred_name || viceMember.full_name;
+              cEntry.depEn = viceMember.preferred_name || viceMember.full_name;
+            }
+          }
+        }
+      }
+    });
+
+    // تحديث عدد الأعضاء في الـ KPI
+    var totalActive = members.filter(function(m) { return m.status === 'Active'; }).length;
+    document.querySelectorAll('.kpi-n').forEach(function(el) {
+      if (el.textContent.trim() === '59+') el.textContent = totalActive + '+';
+    });
+  }
+
+  // ── تحديث المستشارين ───────────────────────
+  function updateAdvisors(advisors) {
+    if (!advisors || !advisors.length) return;
+    var grid = document.querySelector('#tp-adv .adv-grid');
+    if (!grid) return;
+
+    grid.innerHTML = advisors.filter(function(a) { return a.status === 'Active'; }).map(function(a) {
+      var ini = (a.full_name || 'م')[0];
+      return '<div class="adv-card">' +
+        '<div class="adv-av">' + ini + '</div>' +
+        '<div>' +
+          '<div class="adv-name" data-ar>' + a.full_name + '</div>' +
+          '<div class="adv-name" data-en style="display:none">' + a.full_name + '</div>' +
+          '<div class="adv-role" data-ar>' + (a.advisory_role || 'مستشار النادي') + '</div>' +
+          '<div class="adv-role" data-en style="display:none">' + (a.advisory_role || 'Club Advisor') + '</div>' +
+        '</div></div>';
+    }).join('');
+  }
+
+  // ── تحديث الفعاليات من Projects ─────────────
+  function updateEvents(projects) {
+    if (!projects || !projects.length) return;
+
+    var now = new Date();
+    var upcoming = projects.filter(function(p) {
+      return p.project_status !== 'Cancelled' && new Date(p.event_date) >= now;
+    }).sort(function(a,b) { return new Date(a.event_date) - new Date(b.event_date); });
+
+    var past = projects.filter(function(p) {
+      return p.project_status === 'Completed' || new Date(p.event_date) < now;
+    }).sort(function(a,b) { return new Date(b.event_date) - new Date(a.event_date); });
+
+    // تحديث عداد التبويبات
+    var tabs = document.querySelectorAll('.ev-tbtn .ev-cnt');
+    if (tabs[0]) tabs[0].textContent = upcoming.length || '';
+    if (tabs[1]) tabs[1].textContent = past.length || '';
+
+    // تحديث الفعاليات القادمة
+    if (upcoming.length) {
+      var upGrid = document.querySelector('#ev-upcoming .events-grid');
+      if (upGrid) {
+        upGrid.innerHTML = upcoming.map(function(p) {
+          var d = p.event_date ? new Date(p.event_date) : null;
+          var monthAr = d ? d.toLocaleDateString('ar-SA', {month:'long', year:'numeric'}) : '';
+          var monthEn = d ? d.toLocaleDateString('en-AU', {month:'long', year:'numeric'}) : '';
+          return '<div class="ev-card">' +
+            '<div class="ev-hdr green">' +
+              '<div class="ev-month">' + monthAr + '</div>' +
+              '<div class="ev-month-en">' + monthEn + '</div>' +
+              '<div class="ev-name">' + (p.project_name || '') + '</div>' +
+            '</div>' +
+            '<div class="ev-body">' +
+              '<div class="ev-meta">' +
+                '<div class="ev-meta-row"><div class="ev-dot"></div>' + (p.location || 'Melbourne, Victoria') + '</div>' +
+              '</div>' +
+              '<div class="ev-desc" data-ar>' + (p.project_description || '') + '</div>' +
+              '<div class="ev-foot">' +
+                '<span class="ev-tag" data-ar>' + (p.project_type || '') + '</span>' +
+                '<span class="ev-btn-disabled"><span class="ar-only i">التسجيل قريباً</span></span>' +
+              '</div>' +
+            '</div></div>';
+        }).join('');
+      }
+    }
+
+    // تحديث الفعاليات المنتهية
+    if (past.length) {
+      var pastGrid = document.querySelector('#ev-past .past-cards-grid');
+      if (pastGrid) {
+        pastGrid.innerHTML = past.map(function(p) {
+          var d = p.event_date ? new Date(p.event_date) : null;
+          var dateAr = d ? d.toLocaleDateString('ar-SA', {month:'long', year:'numeric'}) : '';
+          return '<div class="past-card">' +
+            '<div class="pc-hdr" style="background:#2A7D42">' +
+              '<div class="pc-done" data-ar>✓ منتهية</div>' +
+              '<div class="pc-date" data-ar>' + dateAr + '</div>' +
+              '<div class="pc-name" data-ar>' + (p.project_name || '') + '</div>' +
+            '</div>' +
+            '<div class="pc-body">' +
+              '<div class="pc-row">' +
+                '<div class="pc-loc"><span class="pc-loc-ic">📍</span>' + (p.location || 'Melbourne') + '</div>' +
+                '<span class="pc-tag" style="background:#2A7D4222;color:#2A7D42" data-ar>' + (p.project_type || 'فعالية') + '</span>' +
+              '</div>' +
+            '</div></div>';
+        }).join('');
+      }
+    }
+  }
+
+  // ── تحميل البيانات ──────────────────────────
+  window.addEventListener('load', function() {
+    // تحميل البيانات بشكل متوازٍ
+    Promise.all([
+      apiGet('getMembers'),
+      apiGet('getAdvisors'),
+      apiGet('getCommittees'),
+      apiGet('getProjects'),
+    ]).then(function(results) {
+      var membersRes    = results[0];
+      var advisorsRes   = results[1];
+      var committeesRes = results[2];
+      var projectsRes   = results[3];
+
+      var members    = (membersRes    && membersRes.success)    ? membersRes.data    : [];
+      var advisors   = (advisorsRes   && advisorsRes.success)   ? advisorsRes.data   : [];
+      var committees = (committeesRes && committeesRes.success) ? committeesRes.data : [];
+      var projects   = (projectsRes   && projectsRes.success)   ? projectsRes.data   : [];
+
+      if (members.length)    updateBoard(members);
+      if (members.length && committees.length) updateCommittees(members, committees);
+      if (advisors.length)   updateAdvisors(advisors);
+      if (projects.length)   updateEvents(projects);
+
+    }).catch(function(e) {
+      console.warn('SSAM API: falling back to static data', e);
+    });
+  });
+
+})();
 </script>
 </body>
 </html>
