@@ -2036,7 +2036,8 @@ function cDrwD() {
       if (members.length)    updateBoard(members);
       if (members.length && committees.length) updateCommittees(members, committees);
       if (advisors.length)   updateAdvisors(advisors);
-      if (projects.length)   updateEvents(projects);
+      // updateEvents disabled — events calendar is static HTML
+      // if (projects.length)   updateEvents(projects);
       if (projects.length)   renderRecentEvents(projects, members);
 
     }).catch(function(e) {
