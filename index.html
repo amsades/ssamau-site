@@ -525,23 +525,81 @@ nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.1);}
     
     <!-- Events tabs -->
     <div class="ev-tabs">
-      <button class="ev-tbtn ac" onclick="evTab('upcoming',this)" data-ar>
-        الفعاليات القادمة<span class="ev-cnt">8</span>
+      <button class="ev-tbtn ac" onclick="evTab('upcoming',this)">
+        <span class="ar-only i">الفعاليات القادمة</span>
+        <span class="en-only i">Upcoming</span>
+        <span class="ev-cnt">8</span>
       </button>
-      <button class="ev-tbtn ac" onclick="evTab('upcoming',this)" data-en style="display:none">
-        Upcoming<span class="ev-cnt">8</span>
-      </button>
-      <button class="ev-tbtn" onclick="evTab('past',this)" data-ar>
-        الفعاليات المنتهية<span class="ev-cnt">7</span>
-      </button>
-      <button class="ev-tbtn" onclick="evTab('past',this)" data-en style="display:none">
-        Past Events<span class="ev-cnt">7</span>
+      <button class="ev-tbtn" onclick="evTab('past',this)">
+        <span class="ar-only i">الفعاليات المنتهية</span>
+        <span class="en-only i">Past Events</span>
+        <span class="ev-cnt">7</span>
       </button>
     </div>
 
     <!-- Upcoming panel -->
     <div class="ev-panel ac" id="ev-upcoming">
       <div class="events-grid">
+        <div class="ev-card">
+        <div class="ev-hdr green">
+          
+          <div class="ev-month">يونيو 2026</div><div class="ev-month-en">June 2026</div>
+          <div class="ev-name">احتفالية عيد الأضحى المبارك</div>
+          <div class="ev-name-en">Eid Al-Adha Celebration</div>
+        </div>
+        <div class="ev-body">
+          <div class="ev-meta">
+            <div class="ev-meta-row"><div class="ev-dot"></div>Melbourne, Victoria</div>
+            <div class="ev-meta-row"><div class="ev-dot"></div>150 – 300 حضور</div>
+          </div>
+          <div class="ev-desc" data-ar>احتفال مجتمعي مع عشاء جماعي وفعاليات ثقافية وترفيهية</div>
+          <div class="ev-desc" data-en style="display:none">Community celebration with communal dinner and cultural activities</div>
+          <div class="ev-foot">
+            <span class="ev-tag " data-ar>مجتمعي</span><span class="ev-tag " data-en style="display:none">Community</span>
+            <span class="ev-btn-disabled"><span class="ar-only i">التسجيل قريباً</span><span class="en-only i">Coming Soon</span></span>
+          </div>
+        </div>
+      </div>
+        <div class="ev-card">
+        <div class="ev-hdr green">
+          
+          <div class="ev-month">يوليو 2026</div><div class="ev-month-en">July 2026</div>
+          <div class="ev-name">استقبال الطلاب الجدد</div>
+          <div class="ev-name-en">New Students Welcome</div>
+        </div>
+        <div class="ev-body">
+          <div class="ev-meta">
+            <div class="ev-meta-row"><div class="ev-dot"></div>Melbourne, Victoria</div>
+            <div class="ev-meta-row"><div class="ev-dot"></div>100 – 200 حضور</div>
+          </div>
+          <div class="ev-desc" data-ar>فعالية ترحيبية بالطلاب السعوديين الجدد القادمين لأستراليا لأول مرة</div>
+          <div class="ev-desc" data-en style="display:none">Welcome event for newly arrived Saudi students in Australia</div>
+          <div class="ev-foot">
+            <span class="ev-tag " data-ar>تكامل</span><span class="ev-tag " data-en style="display:none">Integration</span>
+            <span class="ev-btn-disabled"><span class="ar-only i">التسجيل قريباً</span><span class="en-only i">Coming Soon</span></span>
+          </div>
+        </div>
+      </div>
+        <div class="ev-card">
+        <div class="ev-hdr blue">
+          
+          <div class="ev-month">أغسطس 2026</div><div class="ev-month-en">August 2026</div>
+          <div class="ev-name">المنتدى السعودي</div>
+          <div class="ev-name-en">Saudi Forum</div>
+        </div>
+        <div class="ev-body">
+          <div class="ev-meta">
+            <div class="ev-meta-row"><div class="ev-dot"></div>University of Melbourne</div>
+            <div class="ev-meta-row"><div class="ev-dot"></div>150 – 200 حضور</div>
+          </div>
+          <div class="ev-desc" data-ar>ملتقى قيادي وعلمي مع الأكاديميين ومسؤولي الملحقية الثقافية في أستراليا</div>
+          <div class="ev-desc" data-en style="display:none">Leadership and academic forum with academics and Saudi Cultural Mission officials</div>
+          <div class="ev-foot">
+            <span class="ev-tag " data-ar>أكاديمي</span><span class="ev-tag " data-en style="display:none">Academic</span>
+            <span class="ev-btn-disabled"><span class="ar-only i">التسجيل قريباً</span><span class="en-only i">Coming Soon</span></span>
+          </div>
+        </div>
+      </div>
         <div class="ev-card">
         <div class="ev-hdr gold">
           <div class="ev-badge" data-ar>الفعالية الرئيسية</div><div class="ev-badge" data-en style="display:none">Flagship</div>
@@ -562,67 +620,7 @@ nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.1);}
           </div>
         </div>
       </div>
-      <div class="ev-card">
-        <div class="ev-hdr green">
-          
-          <div class="ev-month">يونيو 2026</div><div class="ev-month-en">June 2026</div>
-          <div class="ev-name">احتفالية عيد الأضحى المبارك</div>
-          <div class="ev-name-en">Eid Al-Adha Celebration</div>
-        </div>
-        <div class="ev-body">
-          <div class="ev-meta">
-            <div class="ev-meta-row"><div class="ev-dot"></div>Melbourne, Victoria</div>
-            <div class="ev-meta-row"><div class="ev-dot"></div>150 – 300 حضور</div>
-          </div>
-          <div class="ev-desc" data-ar>احتفال مجتمعي مع عشاء جماعي وفعاليات ثقافية وترفيهية</div>
-          <div class="ev-desc" data-en style="display:none">Community celebration with communal dinner and cultural activities</div>
-          <div class="ev-foot">
-            <span class="ev-tag " data-ar>مجتمعي</span><span class="ev-tag " data-en style="display:none">Community</span>
-            <span class="ev-btn-disabled"><span class="ar-only i">التسجيل قريباً</span><span class="en-only i">Coming Soon</span></span>
-          </div>
-        </div>
-      </div>
-      <div class="ev-card">
-        <div class="ev-hdr blue">
-          
-          <div class="ev-month">أغسطس 2026</div><div class="ev-month-en">August 2026</div>
-          <div class="ev-name">المنتدى السعودي</div>
-          <div class="ev-name-en">Saudi Forum</div>
-        </div>
-        <div class="ev-body">
-          <div class="ev-meta">
-            <div class="ev-meta-row"><div class="ev-dot"></div>University of Melbourne</div>
-            <div class="ev-meta-row"><div class="ev-dot"></div>150 – 200 حضور</div>
-          </div>
-          <div class="ev-desc" data-ar>ملتقى قيادي وعلمي مع الأكاديميين ومسؤولي الملحقية الثقافية في أستراليا</div>
-          <div class="ev-desc" data-en style="display:none">Leadership and academic forum with academics and Saudi Cultural Mission officials</div>
-          <div class="ev-foot">
-            <span class="ev-tag " data-ar>أكاديمي</span><span class="ev-tag " data-en style="display:none">Academic</span>
-            <span class="ev-btn-disabled"><span class="ar-only i">التسجيل قريباً</span><span class="en-only i">Coming Soon</span></span>
-          </div>
-        </div>
-      </div>
-      <div class="ev-card">
-        <div class="ev-hdr green">
-          
-          <div class="ev-month">يوليو 2026</div><div class="ev-month-en">July 2026</div>
-          <div class="ev-name">استقبال الطلاب الجدد</div>
-          <div class="ev-name-en">New Students Welcome</div>
-        </div>
-        <div class="ev-body">
-          <div class="ev-meta">
-            <div class="ev-meta-row"><div class="ev-dot"></div>Melbourne, Victoria</div>
-            <div class="ev-meta-row"><div class="ev-dot"></div>100 – 200 حضور</div>
-          </div>
-          <div class="ev-desc" data-ar>فعالية ترحيبية بالطلاب السعوديين الجدد القادمين لأستراليا لأول مرة</div>
-          <div class="ev-desc" data-en style="display:none">Welcome event for newly arrived Saudi students in Australia</div>
-          <div class="ev-foot">
-            <span class="ev-tag " data-ar>تكامل</span><span class="ev-tag " data-en style="display:none">Integration</span>
-            <span class="ev-btn-disabled"><span class="ar-only i">التسجيل قريباً</span><span class="en-only i">Coming Soon</span></span>
-          </div>
-        </div>
-      </div>
-      <div class="ev-card">
+        <div class="ev-card">
         <div class="ev-hdr gold">
           
           <div class="ev-month">نوفمبر 2026</div><div class="ev-month-en">November 2026</div>
@@ -642,8 +640,7 @@ nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.1);}
           </div>
         </div>
       </div>
-      
-      <div class="ev-card">
+        <div class="ev-card">
         <div class="ev-hdr blue">
           <div class="ev-month" data-ar>قريباً | 2026</div><div class="ev-month" data-en style="display:none">Coming Soon | 2026</div>
           <div class="ev-name" data-ar>مبادرة مرفأ — لقاءات قادمة</div>
@@ -662,7 +659,7 @@ nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.1);}
           </div>
         </div>
       </div>
-      <div class="ev-card">
+        <div class="ev-card">
         <div class="ev-hdr green">
           <div class="ev-month" data-ar>قريباً | 2026</div><div class="ev-month" data-en style="display:none">Coming Soon | 2026</div>
           <div class="ev-name" data-ar>أنشطة رياضية</div>
@@ -681,7 +678,7 @@ nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.1);}
           </div>
         </div>
       </div>
-      <div class="ev-card">
+        <div class="ev-card">
         <div class="ev-hdr green">
           <div class="ev-month" data-ar>قريباً | 2026</div><div class="ev-month" data-en style="display:none">Coming Soon | 2026</div>
           <div class="ev-name" data-ar>فعاليات اجتماعية</div>
@@ -699,14 +696,93 @@ nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.1);}
             <span class="ev-btn-disabled"><span class="ar-only i">قريباً</span><span class="en-only i">Coming Soon</span></span>
           </div>
         </div>
-      </div>
+      
       </div>
     </div>
+  </div>
 
     <!-- Past panel -->
     <div class="ev-panel" id="ev-past">
       <div class="past-cards-grid">
-        
+        <div class="past-card">
+          <div class="pc-hdr" style="background:#B8932A">
+            <div class="pc-done" data-ar>✓ منتهية</div>
+            <div class="pc-done" data-en style="display:none">✓ Completed</div>
+            <div class="pc-date" data-ar>فبراير 2026 | 10 رمضان 1447هـ</div>
+            <div class="pc-date" data-en style="display:none">Feb 2026 | 10 Ramadan 1447</div>
+            <div class="pc-name" data-ar>فطورنا في ذكرى جذورنا</div>
+            <div class="pc-name" data-en style="display:none">Ftourna Bithikra Jdhoorna</div>
+          </div>
+          <div class="pc-body">
+            <div class="pc-row">
+              <div class="pc-loc">
+                <span class="pc-loc-ic">📍</span>
+                <span data-ar>Victoria University City Campus</span>
+                <span data-en style="display:none">Victoria University City Campus</span>
+              </div>
+              <span class="pc-tag" style="background:#B8932A22;color:#B8932A">
+                <span data-ar>يوم التأسيس</span>
+                <span data-en style="display:none">Founding Day</span>
+              </span>
+            </div>
+            <div class="pc-mgr">
+              <div class="pc-mgr-av">ح</div>
+              <div>
+                <div class="pc-mgr-t">
+                  <span data-ar>مديرة الفعالية</span>
+                  <span data-en style="display:none">Event Manager</span>
+                </div>
+                <div class="pc-mgr-n">
+                  <span data-ar>حنين الرحيلي</span>
+                  <span data-en style="display:none">Haneen Al-Rohaily</span>
+                </div>
+              </div>
+              
+          <div class="pc-stat">
+            <div class="pc-stat-n">300</div>
+            <div class="pc-stat-l" data-ar>حضور</div>
+            <div class="pc-stat-l" data-en style="display:none">Attendees</div>
+          </div>
+            </div>
+          </div>
+        </div>
+        <div class="past-card">
+          <div class="pc-hdr" style="background:#185FA5">
+            <div class="pc-done" data-ar>✓ منتهية</div>
+            <div class="pc-done" data-en style="display:none">✓ Completed</div>
+            <div class="pc-date" data-ar>فبراير 2026</div>
+            <div class="pc-date" data-en style="display:none">February 2026</div>
+            <div class="pc-name" data-ar>يوم التأسيس السعودي</div>
+            <div class="pc-name" data-en style="display:none">Saudi Founding Day</div>
+          </div>
+          <div class="pc-body">
+            <div class="pc-row">
+              <div class="pc-loc">
+                <span class="pc-loc-ic">📍</span>
+                <span data-ar>ملبورن</span>
+                <span data-en style="display:none">Melbourne</span>
+              </div>
+              <span class="pc-tag" style="background:#185FA522;color:#185FA5">
+                <span data-ar>وطني</span>
+                <span data-en style="display:none">National</span>
+              </span>
+            </div>
+            <div class="pc-mgr">
+              <div class="pc-mgr-av">ح</div>
+              <div>
+                <div class="pc-mgr-t">
+                  <span data-ar>مديرة الفعالية</span>
+                  <span data-en style="display:none">Event Manager</span>
+                </div>
+                <div class="pc-mgr-n">
+                  <span data-ar>حنين الرحيلي</span>
+                  <span data-en style="display:none">Haneen Al-Rohaily</span>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
         <div class="past-card">
           <div class="pc-hdr" style="background:#2A7D42">
             <div class="pc-done" data-ar>✓ منتهية</div>
@@ -834,85 +910,6 @@ nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.1);}
           </div>
         </div>
         <div class="past-card">
-          <div class="pc-hdr" style="background:#B8932A">
-            <div class="pc-done" data-ar>✓ منتهية</div>
-            <div class="pc-done" data-en style="display:none">✓ Completed</div>
-            <div class="pc-date" data-ar>فبراير 2026 | 10 رمضان 1447هـ</div>
-            <div class="pc-date" data-en style="display:none">Feb 2026 | 10 Ramadan 1447</div>
-            <div class="pc-name" data-ar>فطورنا في ذكرى جذورنا</div>
-            <div class="pc-name" data-en style="display:none">Ftourna Bithikra Jdhoorna</div>
-          </div>
-          <div class="pc-body">
-            <div class="pc-row">
-              <div class="pc-loc">
-                <span class="pc-loc-ic">📍</span>
-                <span data-ar>Victoria University City Campus</span>
-                <span data-en style="display:none">Victoria University City Campus</span>
-              </div>
-              <span class="pc-tag" style="background:#B8932A22;color:#B8932A">
-                <span data-ar>يوم التأسيس</span>
-                <span data-en style="display:none">Founding Day</span>
-              </span>
-            </div>
-            <div class="pc-mgr">
-              <div class="pc-mgr-av">ح</div>
-              <div>
-                <div class="pc-mgr-t">
-                  <span data-ar>مديرة الفعالية</span>
-                  <span data-en style="display:none">Event Manager</span>
-                </div>
-                <div class="pc-mgr-n">
-                  <span data-ar>حنين الرحيلي</span>
-                  <span data-en style="display:none">Haneen Al-Rohaily</span>
-                </div>
-              </div>
-              
-          <div class="pc-stat">
-            <div class="pc-stat-n">300</div>
-            <div class="pc-stat-l" data-ar>حضور</div>
-            <div class="pc-stat-l" data-en style="display:none">Attendees</div>
-          </div>
-            </div>
-          </div>
-        </div>
-        <div class="past-card">
-          <div class="pc-hdr" style="background:#185FA5">
-            <div class="pc-done" data-ar>✓ منتهية</div>
-            <div class="pc-done" data-en style="display:none">✓ Completed</div>
-            <div class="pc-date" data-ar>فبراير 2026</div>
-            <div class="pc-date" data-en style="display:none">February 2026</div>
-            <div class="pc-name" data-ar>يوم التأسيس السعودي</div>
-            <div class="pc-name" data-en style="display:none">Saudi Founding Day</div>
-          </div>
-          <div class="pc-body">
-            <div class="pc-row">
-              <div class="pc-loc">
-                <span class="pc-loc-ic">📍</span>
-                <span data-ar>ملبورن</span>
-                <span data-en style="display:none">Melbourne</span>
-              </div>
-              <span class="pc-tag" style="background:#185FA522;color:#185FA5">
-                <span data-ar>وطني</span>
-                <span data-en style="display:none">National</span>
-              </span>
-            </div>
-            <div class="pc-mgr">
-              <div class="pc-mgr-av">ح</div>
-              <div>
-                <div class="pc-mgr-t">
-                  <span data-ar>مديرة الفعالية</span>
-                  <span data-en style="display:none">Event Manager</span>
-                </div>
-                <div class="pc-mgr-n">
-                  <span data-ar>حنين الرحيلي</span>
-                  <span data-en style="display:none">Haneen Al-Rohaily</span>
-                </div>
-              </div>
-              
-            </div>
-          </div>
-        </div>
-        <div class="past-card">
           <div class="pc-hdr" style="background:#0D7377">
             <div class="pc-done" data-ar>✓ منتهية</div>
             <div class="pc-done" data-en style="display:none">✓ Completed</div>
@@ -985,7 +982,7 @@ nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.1);}
               
             </div>
           </div>
-        </div>
+        
       </div>
     </div></div>
     </div>
@@ -1208,7 +1205,7 @@ nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.1);}
     <h2 class="section-title" data-en style="display:none">Get In Touch</h2>
     <div class="ct-grid">
       <div class="ct-list">
-        <div class="ct-item"><div class="ct-icon">✉</div><div><div class="ct-label" data-ar>البريد الإلكتروني</div><div class="ct-label" data-en style="display:none">Email</div><div class="ct-val"><a href="mailto:info@ssamau.com">info@ssamau.com</a></div></div></div>
+        <div class="ct-item"><div class="ct-icon">✉</div><div><div class="ct-label" data-ar>البريد الإلكتروني</div><div class="ct-label" data-en style="display:none">Email</div><div class="ct-val"><a href="/cdn-cgi/l/email-protection#650c0b030a251616040804104b060a08"><span class="__cf_email__" data-cfemail="aac3c4ccc5ead9d9cbc7cbdf84c9c5c7">[email&#160;protected]</span></a></div></div></div>
         <div class="ct-item"><div class="ct-icon">◎</div><div><div class="ct-label" data-ar>الموقع الإلكتروني</div><div class="ct-label" data-en style="display:none">Website</div><div class="ct-val"><a href="https://ssamau.com">ssamau.com</a></div></div></div>
         <div class="ct-item"><div class="ct-icon">↗</div><div><div class="ct-label" data-ar>الموقع الجغرافي</div><div class="ct-label" data-en style="display:none">Location</div><div class="ct-val">Melbourne, Victoria, Australia</div></div></div>
         <div class="ct-item"><div class="ct-icon">☏</div><div><div class="ct-label" data-ar>واتساب</div><div class="ct-label" data-en style="display:none">WhatsApp</div><div class="ct-val"><a href="https://wa.me/61499752418" target="_blank">+61 499 752 418</a></div></div></div>
@@ -1258,7 +1255,7 @@ nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.1);}
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
 const MBS=[{"nm": "انمار ايمن", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "بتال وائل", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "نهار وائل", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "ريما راشد", "cm": "لجنة الفعاليات", "gender": "أنثى"}, {"nm": "محمد حسين", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "عبدالرحمن بديوي", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "حسن عقيل", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "بيان حبيب", "cm": "لجنة الفعاليات", "gender": "أنثى"}, {"nm": "هديل علي", "cm": "لجنة الفعاليات", "gender": "أنثى"}, {"nm": "تميم حاتم", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "سراج عبدالله", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "بسام عبدالله", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "أسماء عبدالله", "cm": "لجنة الفعاليات", "gender": "أنثى"}, {"nm": "جنى فيصل", "cm": "لجنة الفعاليات", "gender": "أنثى"}, {"nm": "أمجد ابراهيم", "cm": "لجنة شؤون الطلبة", "gender": "ذكر"}, {"nm": "فاطمة محمد", "cm": "لجنة شؤون الطلبة", "gender": "أنثى"}, {"nm": "يوسف سمير", "cm": "لجنة شؤون الطلبة", "gender": "ذكر"}, {"nm": "أسامه عمر", "cm": "لجنة شؤون الطلبة", "gender": "ذكر"}, {"nm": "عبدالعزيز ابراهيم", "cm": "لجنة شؤون الطلبة", "gender": "ذكر"}, {"nm": "غلا خالد", "cm": "لجنة شؤون الطلبة", "gender": "أنثى"}, {"nm": "عبدالاله سعد", "cm": "لجنة شؤون الطلبة", "gender": "ذكر"}, {"nm": "عبير كامل", "cm": "لجنة شؤون الطلبة", "gender": "ذكر"}, {"nm": "محمد سعيد", "cm": "لجنة الأنشطة الرياضية", "gender": "ذكر"}, {"nm": "عبدالرحمن حسن", "cm": "لجنة الأنشطة الرياضية", "gender": "ذكر"}, {"nm": "عبدالله فهد", "cm": "لجنة الأنشطة الرياضية", "gender": "ذكر"}, {"nm": "حسين بن", "cm": "لجنة الأنشطة الرياضية", "gender": "ذكر"}, {"nm": "فؤاد عبدالرحمن", "cm": "لجنة الأنشطة الرياضية", "gender": "ذكر"}, {"nm": "ايمن محمد", "cm": "لجنة الأنشطة الرياضية", "gender": "ذكر"}, {"nm": "جمانه بندر", "cm": "لجنة البرامج العلمية والمهنية", "gender": "أنثى"}, {"nm": "عبدالله علوي", "cm": "لجنة البرامج العلمية والمهنية", "gender": "ذكر"}, {"nm": "يزن عبدالله", "cm": "لجنة البرامج العلمية والمهنية", "gender": "ذكر"}, {"nm": "محمد تركي", "cm": "لجنة البرامج العلمية والمهنية", "gender": "ذكر"}, {"nm": "علي محمد", "cm": "لجنة البرامج العلمية والمهنية", "gender": "ذكر"}, {"nm": "عمر إبراهيم", "cm": "لجنة البرامج العلمية والمهنية", "gender": "ذكر"}, {"nm": "حنان عبدالله", "cm": "لجنة الاتصال المؤسسي", "gender": "أنثى"}, {"nm": "ريان بن", "cm": "لجنة الاتصال المؤسسي", "gender": "ذكر"}, {"nm": "خالد عصام", "cm": "لجنة الاتصال المؤسسي", "gender": "ذكر"}, {"nm": "عبدالرحمن خالد", "cm": "لجنة الاتصال المؤسسي", "gender": "ذكر"}, {"nm": "بشرى مطر", "cm": "لجنة الاتصال المؤسسي", "gender": "أنثى"}, {"nm": "عيسى عبدالله", "cm": "لجنة الاتصال المؤسسي", "gender": "ذكر"}, {"nm": "هدى حمدان", "cm": "لجنة الاتصال المؤسسي", "gender": "أنثى"}, {"nm": "ابراهيم صالح", "cm": "لجنة الاتصال المؤسسي", "gender": "ذكر"}, {"nm": "رضا ميثم", "cm": "لجنة الاتصال المؤسسي", "gender": "ذكر"}, {"nm": "عبدالرحمن عادل", "cm": "لجنة الاتصال المؤسسي", "gender": "ذكر"}, {"nm": "هاشم خالد", "cm": "اللجنة اللوجستية", "gender": "ذكر"}, {"nm": "سلطان وليد", "cm": "اللجنة اللوجستية", "gender": "ذكر"}, {"nm": "سعد خالد", "cm": "اللجنة اللوجستية", "gender": "ذكر"}, {"nm": "سلطان بدر", "cm": "اللجنة اللوجستية", "gender": "ذكر"}, {"nm": "فيصل جزاء", "cm": "اللجنة اللوجستية", "gender": "ذكر"}, {"nm": "سوسن سعيد", "cm": "لجنة الشؤون المالية", "gender": "أنثى"}, {"nm": "عبدالعزيز عيد", "cm": "لجنة الشؤون المالية", "gender": "ذكر"}, {"nm": "مروة عبدالله", "cm": "لجنة التقييم والجودة", "gender": "أنثى"}, {"nm": "رزان صالح", "cm": "لجنة التقييم والجودة", "gender": "أنثى"}, {"nm": "علي بن", "cm": "لجنة التقييم والجودة", "gender": "ذكر"}];
 const COMS_DATA=[{"id": "events", "ic": "🎪", "ar": "لجنة الفعاليات", "en": "Events Committee", "hAr": "حنين الرحيلي", "hEn": "Haneen Al-Rohaily", "depAr": "انمار بريسالي", "depEn": "Anmar Beresaly", "cm": "لجنة الفعاليات"}, {"id": "student", "ic": "🎓", "ar": "لجنة شؤون الطلبة", "en": "Student Affairs", "hAr": "أمجد أبو الخير", "hEn": "Amjad Abu Al-Khayr", "depAr": "فاطمة الحداد", "depEn": "Fatima Al-Haddad", "cm": "لجنة شؤون الطلبة"}, {"id": "sports", "ic": "⚽", "ar": "لجنة الأنشطة الرياضية", "en": "Sports & Recreation", "hAr": "محمد الغامدي", "hEn": "Mohammed Al-Ghamdi", "depAr": null, "depEn": null, "cm": "لجنة الأنشطة الرياضية"}, {"id": "academic", "ic": "🔬", "ar": "لجنة البرامج العلمية والمهنية", "en": "Academic Programs", "hAr": "أحمد الرويلي", "hEn": "Ahmed Al-Ruwaili", "depAr": null, "depEn": null, "cm": "لجنة البرامج العلمية والمهنية"}, {"id": "media", "ic": "📡", "ar": "لجنة الاتصال المؤسسي", "en": "Communications", "hAr": "عبدالرحمن الحربي", "hEn": "Abdulrahman Al-Harbi", "depAr": "حنان الزهراني", "depEn": "Hanan Al-Zahrani", "cm": "لجنة الاتصال المؤسسي"}, {"id": "logistics", "ic": "📦", "ar": "اللجنة اللوجستية", "en": "Logistics", "hAr": "سعد الشريف", "hEn": "Saad Al-Sharif", "depAr": null, "depEn": null, "cm": "اللجنة اللوجستية"}, {"id": "finance", "ic": "💰", "ar": "لجنة الشؤون المالية", "en": "Finance", "hAr": null, "hEn": null, "depAr": null, "depEn": null, "cm": "لجنة الشؤون المالية"}, {"id": "quality", "ic": "📊", "ar": "لجنة التقييم والجودة", "en": "Quality & Evaluation", "hAr": "علي المرحبي", "hEn": "Ali Al-Marhabi", "depAr": null, "depEn": null, "cm": "لجنة التقييم والجودة"}];
 function swTab(id,idx){
@@ -1343,6 +1340,16 @@ function toggleLang() {
   }
 }
 
+// ── EVENTS TABS ──
+function evTab(id, btn) {
+  document.querySelectorAll('.ev-panel').forEach(function(p) { p.classList.remove('ac'); });
+  var panel = document.getElementById('ev-' + id);
+  if (panel) panel.classList.add('ac');
+  document.querySelectorAll('.ev-tbtn').forEach(function(b) {
+    b.classList.toggle('ac', b.getAttribute('onclick') === btn.getAttribute('onclick'));
+  });
+}
+
 // ── GOVERNANCE DATA ──
 var MBS_LIST = [{"nm": "انمار بريسالي", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "أمجد محمد", "cm": "لجنة شؤون الطلبة", "gender": "ذكر"}, {"nm": "محمد الغامدي", "cm": "لجنة الأنشطة الرياضية", "gender": "ذكر"}, {"nm": "جمانه عمير", "cm": "لجنة البرامج العلمية والمهنية", "gender": "أنثى"}, {"nm": "حنان الزهراني", "cm": "لجنة الاتصال المؤسسي", "gender": "أنثى"}, {"nm": "عبدالرحمن الفيفي", "cm": "لجنة الأنشطة الرياضية", "gender": "ذكر"}, {"nm": "بتال الأحمدي", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "نهار الاحمدي", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "فاطمة الحداد", "cm": "لجنة شؤون الطلبة", "gender": "أنثى"}, {"nm": "عبدالله الجهوري", "cm": "لجنة البرامج العلمية والمهنية", "gender": "ذكر"}, {"nm": "ريما الشقيق", "cm": "لجنة الفعاليات", "gender": "أنثى"}, {"nm": "محمد حكمي", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "عبدالرحمن الغامدي", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "ريان العنزي", "cm": "لجنة الاتصال المؤسسي", "gender": "ذكر"}, {"nm": "خالد باتياه", "cm": "لجنة الاتصال المؤسسي", "gender": "ذكر"}, {"nm": "عبدالرحمن الشهرب", "cm": "لجنة الاتصال المؤسسي", "gender": "ذكر"}, {"nm": "بشرى الشمري", "cm": "لجنة الاتصال المؤسسي", "gender": "أنثى"}, {"nm": "مروة الحربي", "cm": "لجنة التقييم والجودة", "gender": "أنثى"}, {"nm": "رزان السعدي", "cm": "لجنة التقييم والجودة", "gender": "أنثى"}, {"nm": "يوسف الشهري", "cm": "لجنة شؤون الطلبة", "gender": "ذكر"}, {"nm": "عيسى المتعاني", "cm": "لجنة الاتصال المؤسسي", "gender": "ذكر"}, {"nm": "حسن الشغب", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "هدى البكيري", "cm": "لجنة الاتصال المؤسسي", "gender": "أنثى"}, {"nm": "علي المرحبي", "cm": "لجنة التقييم والجودة", "gender": "ذكر"}, {"nm": "يزن الحربي", "cm": "لجنة البرامج العلمية والمهنية", "gender": "ذكر"}, {"nm": "سوسن الغامدي", "cm": "لجنة الشؤون المالية", "gender": "أنثى"}, {"nm": "هاشم الشريف", "cm": "اللجنة اللوجستية", "gender": "ذكر"}, {"nm": "ابراهيم الخراشي", "cm": "لجنة الاتصال المؤسسي", "gender": "ذكر"}, {"nm": "عبدالله العجاجي", "cm": "لجنة الأنشطة الرياضية", "gender": "ذكر"}, {"nm": "محمد الشهري", "cm": "لجنة البرامج العلمية والمهنية", "gender": "ذكر"}, {"nm": "بيان الجارودي", "cm": "لجنة الفعاليات", "gender": "أنثى"}, {"nm": "أسامه باركب", "cm": "لجنة شؤون الطلبة", "gender": "ذكر"}, {"nm": "هديل حمدي", "cm": "لجنة الفعاليات", "gender": "أنثى"}, {"nm": "سلطان طاهر", "cm": "اللجنة اللوجستية", "gender": "ذكر"}, {"nm": "عبدالعزيز الرشيد", "cm": "لجنة الشؤون المالية", "gender": "ذكر"}, {"nm": "سعد الشريف", "cm": "اللجنة اللوجستية", "gender": "ذكر"}, {"nm": "عبدالعزيز الصيخان", "cm": "لجنة شؤون الطلبة", "gender": "ذكر"}, {"nm": "غلا زاحم", "cm": "لجنة شؤون الطلبة", "gender": "أنثى"}, {"nm": "سلطان الظفيري", "cm": "اللجنة اللوجستية", "gender": "ذكر"}, {"nm": "تميم الغامدي", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "عبدالاله القريني", "cm": "لجنة شؤون الطلبة", "gender": "ذكر"}, {"nm": "حسين شريه", "cm": "لجنة الأنشطة الرياضية", "gender": "ذكر"}, {"nm": "فؤاد الحديثي", "cm": "لجنة الأنشطة الرياضية", "gender": "ذكر"}, {"nm": "عبير العميري", "cm": "لجنة شؤون الطلبة", "gender": "أنثى"}, {"nm": "رضا الصالح", "cm": "لجنة الاتصال المؤسسي", "gender": "ذكر"}, {"nm": "ايمن الشخص", "cm": "لجنة الأنشطة الرياضية", "gender": "ذكر"}, {"nm": "علي شريف", "cm": "لجنة البرامج العلمية والمهنية", "gender": "ذكر"}, {"nm": "عمر الحسين", "cm": "لجنة البرامج العلمية والمهنية", "gender": "ذكر"}, {"nm": "سراج قاسم", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "عبدالرحمن الحربي", "cm": "لجنة الاتصال المؤسسي", "gender": "ذكر"}, {"nm": "بسام الراجحي", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "أسماء الفضلي", "cm": "لجنة الفعاليات", "gender": "أنثى"}, {"nm": "فيصل العتيبي", "cm": "اللجنة اللوجستية", "gender": "ذكر"}, {"nm": "جنى الحصان", "cm": "لجنة الفعاليات", "gender": "أنثى"}];
 var COMS_DATA = [{"id": "events", "ic": "🎪", "ar": "لجنة الفعاليات", "en": "Events Committee", "hAr": "حنين الرحيلي", "hEn": "Haneen Al-Rohaily", "depAr": "انمار بريسالي", "depEn": "Anmar Beresaly", "cm": "لجنة الفعاليات"}, {"id": "student", "ic": "🎓", "ar": "لجنة شؤون الطلبة", "en": "Student Affairs", "hAr": "أمجد أبو الخير", "hEn": "Amjad Abu Al-Khayr", "depAr": "فاطمة الحداد", "depEn": "Fatima Al-Haddad", "cm": "لجنة شؤون الطلبة"}, {"id": "sports", "ic": "⚽", "ar": "لجنة الأنشطة الرياضية", "en": "Sports & Recreation", "hAr": "محمد الغامدي", "hEn": "Mohammed Al-Ghamdi", "depAr": null, "depEn": null, "cm": "لجنة الأنشطة الرياضية"}, {"id": "academic", "ic": "🔬", "ar": "لجنة البرامج العلمية والمهنية", "en": "Academic Programs", "hAr": "أحمد الرويلي", "hEn": "Ahmed Al-Ruwaili", "depAr": null, "depEn": null, "cm": "لجنة البرامج العلمية والمهنية"}, {"id": "media", "ic": "📡", "ar": "لجنة الاتصال المؤسسي", "en": "Communications", "hAr": "عبدالرحمن الحربي", "hEn": "Abdulrahman Al-Harbi", "depAr": "حنان الزهراني", "depEn": "Hanan Al-Zahrani", "cm": "لجنة الاتصال المؤسسي"}, {"id": "logistics", "ic": "📦", "ar": "اللجنة اللوجستية", "en": "Logistics", "hAr": "سعد الشريف", "hEn": "Saad Al-Sharif", "depAr": null, "depEn": null, "cm": "اللجنة اللوجستية"}, {"id": "finance", "ic": "💰", "ar": "لجنة الشؤون المالية", "en": "Finance", "hAr": null, "hEn": null, "depAr": null, "depEn": null, "cm": "لجنة الشؤون المالية"}, {"id": "quality", "ic": "📊", "ar": "لجنة التقييم والجودة", "en": "Quality & Evaluation", "hAr": "علي المرحبي", "hEn": "Ali Al-Marhabi", "depAr": null, "depEn": null, "cm": "لجنة التقييم والجودة"}];
@@ -1399,21 +1406,6 @@ function cDrw(e) {
 function cDrwD() {
   document.getElementById('drw').classList.remove('op');
   document.body.style.overflow = '';
-}
-
-function evTab(id, btn) {
-  // Toggle panels
-  document.querySelectorAll('.ev-panel').forEach(p => p.classList.remove('ac'));
-  document.getElementById('ev-' + id).classList.add('ac');
-  // Toggle buttons — handle both AR and EN buttons
-  var allBtns = document.querySelectorAll('.ev-tbtn');
-  // Find index of clicked btn among visible buttons
-  allBtns.forEach(function(b) { b.classList.remove('ac'); });
-  // Activate matching buttons (same onclick)
-  var onclick = btn.getAttribute('onclick');
-  allBtns.forEach(function(b) {
-    if (b.getAttribute('onclick') === onclick) b.classList.add('ac');
-  });
 }
 </script>
 </body>
