@@ -1468,56 +1468,36 @@ function openGallery(folderId, title, dateStr) {
 
 function loadGalleryImages(folderId) {
   var wrap = document.getElementById('gallery-slide-wrap');
-  document.getElementById('gallery-loading').style.display = 'flex';
-  document.getElementById('gallery-loading').textContent = '⏳ جاري تحميل الصور...';
-  document.getElementById('gallery-dots').innerHTML = '';
-  document.getElementById('gallery-counter').textContent = '';
-  _galImages = [];
-  _galIdx = 0;
-
-  var apiKey = 'AIzaSyCIZ6ou537jVHK7sXBazHyS44pjPoeaLHU';
-  var url = 'https://www.googleapis.com/drive/v3/files'
-    + '?q=' + encodeURIComponent("'" + folderId + "' in parents and mimeType contains 'image/' and trashed=false")
-    + '&fields=files(id,name)'
-    + '&orderBy=name'
-    + '&pageSize=50'
-    + '&key=' + apiKey;
-
-  fetch(url)
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      if (data.error || !data.files || !data.files.length) {
-        showGalleryFallback(folderId, wrap);
-        return;
-      }
-      _galImages = data.files.map(function(f) {
-        return {
-          id: f.id,
-          name: f.name,
-          url: 'https://drive.google.com/thumbnail?id=' + f.id + '&sz=w1200'
-        };
-      });
-      buildSlideshow(wrap);
-    })
-    .catch(function() {
-      showGalleryFallback(folderId, wrap);
-    });
-}
-
-function showGalleryFallback(folderId, wrap) {
-  document.getElementById('gallery-loading').style.display = 'none';
-  wrap.querySelectorAll('iframe').forEach(function(el) { el.remove(); });
-  var iframe = document.createElement('iframe');
-  iframe.src = 'https://drive.google.com/embeddedfolderview?id=' + folderId + '#grid';
-  iframe.style.cssText = 'width:100%;height:100%;border:none;min-height:460px;';
-  iframe.title = 'معرض الصور';
-  wrap.style.aspectRatio = 'unset';
-  wrap.style.minHeight = '460px';
-  wrap.appendChild(iframe);
-  document.getElementById('gallery-progress').parentElement.style.display = 'none';
+  // إخفاء عناصر الـ slideshow
   document.getElementById('gallery-dots').style.display = 'none';
   document.getElementById('gallery-prev').style.display = 'none';
   document.getElementById('gallery-next').style.display = 'none';
+  document.getElementById('gallery-progress').parentElement.style.display = 'none';
+  document.getElementById('gallery-counter').textContent = '';
+  document.getElementById('gallery-loading').style.display = 'flex';
+  document.getElementById('gallery-loading').textContent = '⏳ جاري تحميل الصور...';
+
+  // إزالة أي iframe سابق
+  wrap.querySelectorAll('iframe, img.gallery-slide-img').forEach(function(el) { el.remove(); });
+
+  // ضبط الحجم
+  wrap.style.aspectRatio = 'unset';
+  wrap.style.minHeight = '480px';
+
+  // إنشاء iframe مباشرةً من Google Drive
+  var iframe = document.createElement('iframe');
+  iframe.src = 'https://drive.google.com/embeddedfolderview?id=' + folderId + '#grid';
+  iframe.style.cssText = 'width:100%;height:480px;border:none;border-radius:0 0 8px 8px;';
+  iframe.title = 'معرض الصور';
+  iframe.onload = function() {
+    document.getElementById('gallery-loading').style.display = 'none';
+  };
+  wrap.appendChild(iframe);
+
+  // إخفاء loading بعد 3 ثواني على أي حال
+  setTimeout(function() {
+    document.getElementById('gallery-loading').style.display = 'none';
+  }, 3000);
 }
 
 function buildSlideshow(wrap) {
@@ -1592,9 +1572,15 @@ function closeGalleryDirect() {
   _galImages = []; _galIdx = 0;
   var wrap = document.getElementById('gallery-slide-wrap');
   wrap.querySelectorAll('.gallery-slide-img, iframe').forEach(function(el) { el.remove(); });
+  wrap.style.minHeight = '';
+  wrap.style.aspectRatio = '16/9';
   document.getElementById('gallery-loading').style.display = 'flex';
   document.getElementById('gallery-loading').textContent = '⏳ جاري تحميل الصور...';
   document.getElementById('gallery-dots').innerHTML = '';
+  document.getElementById('gallery-dots').style.display = 'flex';
+  document.getElementById('gallery-prev').style.display = 'flex';
+  document.getElementById('gallery-next').style.display = 'flex';
+  document.getElementById('gallery-progress').parentElement.style.display = 'block';
 }
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeGalleryDirect();
@@ -1917,8 +1903,10 @@ function cDrwD() {
           var pStats = {};
           try { pStats = JSON.parse(p.notes || '{}'); } catch(e) {}
           var galleryId = pStats.gallery_folder || '';
+          var safeTitle = (p.project_name || '').replace(/"/g, '&quot;');
+          var safeDate  = dateAr.replace(/"/g, '&quot;');
           var clickAttr = galleryId
-            ? ' style="cursor:pointer" onclick="openGallery('' + galleryId + '','' + (p.project_name||'').replace(/'/g,"\'") + '','' + dateAr + '')"'
+            ? ' style="cursor:pointer" data-gid="' + galleryId + '" data-gtitle="' + safeTitle + '" data-gdate="' + safeDate + '" onclick="var el=this;openGallery(el.dataset.gid,el.dataset.gtitle,el.dataset.gdate)"'
             : '';
           return '<div class="past-card"' + clickAttr + '>' +
             '<div class="pc-hdr" style="background:#2A7D42">' +
