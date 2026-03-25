@@ -250,7 +250,7 @@ footer{background:var(--gd);padding:2.5rem 2rem;border-top:1px solid rgba(184,14
 
 /* ── LANG SWITCH ── */
 
-.ev-card.ev-past:hover{opacity:1;filter:saturate(1);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.12);}
+
 
 .ev-done-badge{position:absolute;top:.65rem;left:.65rem;background:rgba(255,255,255,.18);color:rgba(255,255,255,.9);font-size:.6rem;font-weight:700;padding:.12rem .45rem;border-radius:50px;letter-spacing:.03em;}
 .ev-btn-disabled{background:#f3f4f6;color:#9ca3af;font-size:.72rem;font-weight:700;padding:.28rem .75rem;border-radius:50px;border:1px dashed #d1d5db;cursor:not-allowed;display:inline-block;}
@@ -325,7 +325,44 @@ nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.1);}
 .en-lang .en-only{display:block}
 .en-lang .en-only.i{display:inline}
 .en-lang{direction:ltr}
+
+/* Past events — compact horizontal list */
+.events-past-section{margin-top:.5rem}
+.events-past-label{display:flex;align-items:center;gap:.75rem;margin-bottom:.85rem}
+.events-past-label-line{flex:1;height:1px;background:var(--bd)}
+.events-past-label-txt{font-size:.68rem;font-weight:700;color:var(--tm);white-space:nowrap;padding:.18rem .6rem;background:var(--bd);border-radius:50px}
+.past-grid{display:flex;flex-wrap:wrap;gap:.55rem}
+.past-pill{
+  display:flex;align-items:center;gap:.5rem;
+  background:#f8f9fa;border:1px solid var(--bd);border-radius:50px;
+  padding:.4rem .85rem .4rem .5rem;
+  cursor:default;transition:all .2s;
+  font-size:.78rem;
+}
+.past-pill:hover{
+  background:#fff;border-color:var(--g);
+  box-shadow:0 2px 8px rgba(0,0,0,.07);
+  transform:translateY(-1px);
+}
+.past-pill-ic{font-size:.9rem;line-height:1;opacity:.6}
+.past-pill:hover .past-pill-ic{opacity:1}
+.past-pill-name{font-weight:600;color:var(--tl)}
+.past-pill:hover .past-pill-name{color:var(--gd)}
+.past-pill-mo{font-size:.67rem;color:var(--tm);margin-inline-start:.2rem}
+.past-pill-done{
+  font-size:.6rem;font-weight:700;color:#6b7280;
+  background:#e5e7eb;border-radius:50px;
+  padding:.1rem .4rem;margin-inline-start:.15rem;
+}
 </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W1G3RERMS3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-W1G3RERMS3');
+</script>
 </head>
 <body id="site-body">
 
@@ -595,146 +632,26 @@ nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.1);}
           </div>
         </div>
       </div>
-<div style="grid-column:1/-1;display:flex;align-items:center;gap:.85rem;margin:.5rem 0">
-        <div style="flex:1;height:1px;background:var(--bd)"></div>
-        <div style="font-size:.7rem;font-weight:700;color:var(--tm);white-space:nowrap;background:var(--bd);padding:.22rem .7rem;border-radius:50px" data-ar>الفعاليات المنتهية</div>
-        <div style="font-size:.7rem;font-weight:700;color:var(--tm);white-space:nowrap;background:var(--bd);padding:.22rem .7rem;border-radius:50px" data-en style="display:none">Past Events</div>
-        <div style="flex:1;height:1px;background:var(--bd)"></div>
-      </div>
-      <div class="ev-card ev-past">
-        <div class="ev-hdr green">
-          <div class="ev-done-badge" data-ar>✓ منتهية</div><div class="ev-done-badge" data-en style="display:none">✓ Completed</div>
-          <div class="ev-month">رمضان 1447 | مارس 2026</div><div class="ev-month-en">Ramadan 1447 | Mar 2026</div>
-          <div class="ev-name">إفطار رمضان — رجال</div>
-          <div class="ev-name-en">Ramadan Iftar (Men)</div>
+
+      <!-- Past events compact -->
+      <div class="events-past-section">
+        <div class="events-past-label">
+          <div class="events-past-label-line"></div>
+          <div class="events-past-label-txt" data-ar>الفعاليات المنتهية</div>
+          <div class="events-past-label-txt" data-en style="display:none">Past Events</div>
+          <div class="events-past-label-line"></div>
         </div>
-        <div class="ev-body">
-          <div class="ev-meta">
-            <div class="ev-meta-row"><div class="ev-dot"></div>Melbourne, Victoria</div>
-            <div class="ev-meta-row"><div class="ev-dot"></div>مبادرة مجتمعية</div>
-          </div>
-          <div class="ev-desc" data-ar>إفطار جماعي رمضاني للطلاب السعوديين في ملبورن خلال شهر رمضان المبارك</div>
-          <div class="ev-desc" data-en style="display:none">Community Ramadan Iftar for Saudi students in Melbourne during the holy month</div>
-          <div class="ev-foot">
-            <span class="ev-tag" data-ar>منتهية</span><span class="ev-tag" data-en style="display:none">Completed</span>
-          </div>
+        <div class="past-grid">
+        <div class="past-pill" title="إفطار رمضان — رجال"><span class="past-pill-ic">🟢</span><span class="past-pill-name" data-ar>إفطار رمضان — رجال</span><span class="past-pill-mo" data-ar>رمضان 1447 | مارس 2026</span><span class="past-pill-done" data-ar>✓</span></div>
+        <div class="past-pill" title="احتفالية عيد الفطر — رجال"><span class="past-pill-ic">🟢</span><span class="past-pill-name" data-ar>احتفالية عيد الفطر — رجال</span><span class="past-pill-mo" data-ar>مارس 2026</span><span class="past-pill-done" data-ar>✓</span></div>
+        <div class="past-pill" title="احتفالية عيد الفطر — نساء"><span class="past-pill-ic">🟢</span><span class="past-pill-name" data-ar>احتفالية عيد الفطر — نساء</span><span class="past-pill-mo" data-ar>مارس 2026</span><span class="past-pill-done" data-ar>✓</span></div>
+        <div class="past-pill" title="فطورنا في ذكرى جذورنا"><span class="past-pill-ic">🟢</span><span class="past-pill-name" data-ar>فطورنا في ذكرى جذورنا</span><span class="past-pill-mo" data-ar>رمضان 1447 | فبراير 2026</span><span class="past-pill-done" data-ar>✓</span></div>
+        <div class="past-pill" title="يوم التأسيس السعودي"><span class="past-pill-ic">🟡</span><span class="past-pill-name" data-ar>يوم التأسيس السعودي</span><span class="past-pill-mo" data-ar>فبراير 2026</span><span class="past-pill-done" data-ar>✓</span></div>
+        <div class="past-pill" title="مبادرة مرفأ — اللقاء الأول ✓"><span class="past-pill-ic">🔵</span><span class="past-pill-name" data-ar>مبادرة مرفأ — اللقاء الأول ✓</span><span class="past-pill-mo" data-ar>مارس 2026</span><span class="past-pill-done" data-ar>✓</span></div>
+        <div class="past-pill" title="مبادرة مرفأ — اللقاء الثاني ✓"><span class="past-pill-ic">🔵</span><span class="past-pill-name" data-ar>مبادرة مرفأ — اللقاء الثاني ✓</span><span class="past-pill-mo" data-ar>مارس 2026</span><span class="past-pill-done" data-ar>✓</span></div>
         </div>
       </div>
-      <div class="ev-card ev-past">
-        <div class="ev-hdr green">
-          <div class="ev-done-badge" data-ar>✓ منتهية</div><div class="ev-done-badge" data-en style="display:none">✓ Completed</div>
-          <div class="ev-month">مارس 2026</div><div class="ev-month-en">March 2026</div>
-          <div class="ev-name">احتفالية عيد الفطر — رجال</div>
-          <div class="ev-name-en">Eid Al-Fitr Celebration (Men)</div>
-        </div>
-        <div class="ev-body">
-          <div class="ev-meta">
-            <div class="ev-meta-row"><div class="ev-dot"></div>Monash College, Docklands VIC</div>
-            <div class="ev-meta-row"><div class="ev-dot"></div>~270 حضور</div>
-          </div>
-          <div class="ev-desc" data-ar>احتفال عيد الفطر المبارك للرجال مع فعاليات ترفيهية وتراثية</div>
-          <div class="ev-desc" data-en style="display:none">Eid Al-Fitr celebration for men with cultural and entertainment activities</div>
-          <div class="ev-foot">
-            <span class="ev-tag" data-ar>منتهية</span><span class="ev-tag" data-en style="display:none">Completed</span>
-          </div>
-        </div>
-      </div>
-      <div class="ev-card ev-past">
-        <div class="ev-hdr green">
-          <div class="ev-done-badge" data-ar>✓ منتهية</div><div class="ev-done-badge" data-en style="display:none">✓ Completed</div>
-          <div class="ev-month">مارس 2026</div><div class="ev-month-en">March 2026</div>
-          <div class="ev-name">احتفالية عيد الفطر — نساء</div>
-          <div class="ev-name-en">Eid Al-Fitr Celebration (Women)</div>
-        </div>
-        <div class="ev-body">
-          <div class="ev-meta">
-            <div class="ev-meta-row"><div class="ev-dot"></div>Leila Hall, Brunswick VIC</div>
-            <div class="ev-meta-row"><div class="ev-dot"></div>200+ حضور</div>
-          </div>
-          <div class="ev-desc" data-ar>احتفال عيد الفطر المبارك للنساء مع فعاليات ترفيهية وثقافية</div>
-          <div class="ev-desc" data-en style="display:none">Eid Al-Fitr celebration for women with cultural activities</div>
-          <div class="ev-foot">
-            <span class="ev-tag" data-ar>منتهية</span><span class="ev-tag" data-en style="display:none">Completed</span>
-          </div>
-        </div>
-      </div>
-      <div class="ev-card ev-past">
-        <div class="ev-hdr green">
-          <div class="ev-done-badge" data-ar>✓ منتهية</div><div class="ev-done-badge" data-en style="display:none">✓ Completed</div>
-          <div class="ev-month">رمضان 1447 | فبراير 2026</div><div class="ev-month-en">Ramadan 1447 | Feb 2026</div>
-          <div class="ev-name">فطورنا في ذكرى جذورنا</div>
-          <div class="ev-name-en">Ftourna Bithikra Jdoudna</div>
-        </div>
-        <div class="ev-body">
-          <div class="ev-meta">
-            <div class="ev-meta-row"><div class="ev-dot"></div>Victoria University City Campus</div>
-            <div class="ev-meta-row"><div class="ev-dot"></div>300 حضور | 237 تذكرة</div>
-          </div>
-          <div class="ev-desc" data-ar>فعالية يوم التأسيس السعودي وإفطار رمضان — أُقيمت في Victoria University City Campus</div>
-          <div class="ev-desc" data-en style="display:none">Saudi Founding Day celebration & Ramadan Iftar — Victoria University City Campus</div>
-          <div class="ev-foot">
-            <span class="ev-tag" data-ar>منتهية</span><span class="ev-tag" data-en style="display:none">Completed</span>
-          </div>
-        </div>
-      </div>
-      <div class="ev-card ev-past">
-        <div class="ev-hdr gold">
-          <div class="ev-done-badge" data-ar>✓ منتهية</div><div class="ev-done-badge" data-en style="display:none">✓ Completed</div>
-          <div class="ev-month">فبراير 2026</div><div class="ev-month-en">February 2026</div>
-          <div class="ev-name">يوم التأسيس السعودي</div>
-          <div class="ev-name-en">Saudi Founding Day</div>
-        </div>
-        <div class="ev-body">
-          <div class="ev-meta">
-            <div class="ev-meta-row"><div class="ev-dot"></div>Melbourne</div>
-            <div class="ev-meta-row"><div class="ev-dot"></div>متعدد الفعاليات</div>
-          </div>
-          <div class="ev-desc" data-ar>الاحتفاء بذكرى تأسيس المملكة العربية السعودية</div>
-          <div class="ev-desc" data-en style="display:none">Celebrating Saudi Arabia's founding anniversary</div>
-          <div class="ev-foot">
-            <span class="ev-tag" data-ar>منتهية</span><span class="ev-tag" data-en style="display:none">Completed</span>
-          </div>
-        </div>
-      </div>
-      <div class="ev-card ev-past">
-        <div class="ev-hdr blue">
-          <div class="ev-done-badge" data-ar>✓ منتهية</div><div class="ev-done-badge" data-en style="display:none">✓ Completed</div>
-          <div class="ev-month">مارس 2026</div><div class="ev-month-en">March 2026</div>
-          <div class="ev-name">مبادرة مرفأ — اللقاء الأول ✓</div>
-          <div class="ev-name-en">Marfa Initiative — Session 1 ✓</div>
-        </div>
-        <div class="ev-body">
-          <div class="ev-meta">
-            <div class="ev-meta-row"><div class="ev-dot"></div>Online | Melbourne</div>
-            <div class="ev-meta-row"><div class="ev-dot"></div>مبادرة مجتمعية</div>
-          </div>
-          <div class="ev-desc" data-ar>اللقاء الأول: دعم الصحة النفسية والجسدية للمبتعثين السعوديين</div>
-          <div class="ev-desc" data-en style="display:none">Session 1: Supporting mental and physical wellbeing of Saudi students abroad</div>
-          <div class="ev-foot">
-            <span class="ev-tag" data-ar>منتهية</span><span class="ev-tag" data-en style="display:none">Completed</span>
-          </div>
-        </div>
-      </div>
-      <div class="ev-card ev-past">
-        <div class="ev-hdr blue">
-          <div class="ev-done-badge" data-ar>✓ منتهية</div><div class="ev-done-badge" data-en style="display:none">✓ Completed</div>
-          <div class="ev-month">مارس 2026</div><div class="ev-month-en">March 2026</div>
-          <div class="ev-name">مبادرة مرفأ — اللقاء الثاني ✓</div>
-          <div class="ev-name-en">Marfa Initiative — Session 2 ✓</div>
-        </div>
-        <div class="ev-body">
-          <div class="ev-meta">
-            <div class="ev-meta-row"><div class="ev-dot"></div>Online | Melbourne</div>
-            <div class="ev-meta-row"><div class="ev-dot"></div>مبادرة مجتمعية</div>
-          </div>
-          <div class="ev-desc" data-ar>اللقاء الثاني: التكيّف مع الغربة وبناء علاقات إيجابية</div>
-          <div class="ev-desc" data-en style="display:none">Session 2: Adapting to life abroad and building positive relationships</div>
-          <div class="ev-foot">
-            <span class="ev-tag" data-ar>منتهية</span><span class="ev-tag" data-en style="display:none">Completed</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    
   </div>
 </section>
 
@@ -986,7 +903,7 @@ nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.1);}
     <h2 class="section-title" data-en style="display:none">Get In Touch</h2>
     <div class="ct-grid">
       <div class="ct-list">
-        <div class="ct-item"><div class="ct-icon">✉</div><div><div class="ct-label" data-ar>البريد الإلكتروني</div><div class="ct-label" data-en style="display:none">Email</div><div class="ct-val"><a href="mailto:info@ssamau.com">info@ssamau.com</a></div></div></div>
+        <div class="ct-item"><div class="ct-icon">✉</div><div><div class="ct-label" data-ar>البريد الإلكتروني</div><div class="ct-label" data-en style="display:none">Email</div><div class="ct-val"><a href="/cdn-cgi/l/email-protection#4d24232b220d3e3e2c202c38632e2220"><span class="__cf_email__" data-cfemail="6d04030b022d1e1e0c000c18430e0200">[email&#160;protected]</span></a></div></div></div>
         <div class="ct-item"><div class="ct-icon">◎</div><div><div class="ct-label" data-ar>الموقع الإلكتروني</div><div class="ct-label" data-en style="display:none">Website</div><div class="ct-val"><a href="https://ssamau.com">ssamau.com</a></div></div></div>
         <div class="ct-item"><div class="ct-icon">↗</div><div><div class="ct-label" data-ar>الموقع الجغرافي</div><div class="ct-label" data-en style="display:none">Location</div><div class="ct-val">Melbourne, Victoria, Australia</div></div></div>
         <div class="ct-item"><div class="ct-icon">☏</div><div><div class="ct-label" data-ar>واتساب</div><div class="ct-label" data-en style="display:none">WhatsApp</div><div class="ct-val"><a href="https://wa.me/61499752418" target="_blank">+61 499 752 418</a></div></div></div>
@@ -1036,7 +953,7 @@ nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.1);}
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
 const MBS=[{"nm": "انمار ايمن", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "بتال وائل", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "نهار وائل", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "ريما راشد", "cm": "لجنة الفعاليات", "gender": "أنثى"}, {"nm": "محمد حسين", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "عبدالرحمن بديوي", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "حسن عقيل", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "بيان حبيب", "cm": "لجنة الفعاليات", "gender": "أنثى"}, {"nm": "هديل علي", "cm": "لجنة الفعاليات", "gender": "أنثى"}, {"nm": "تميم حاتم", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "سراج عبدالله", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "بسام عبدالله", "cm": "لجنة الفعاليات", "gender": "ذكر"}, {"nm": "أسماء عبدالله", "cm": "لجنة الفعاليات", "gender": "أنثى"}, {"nm": "جنى فيصل", "cm": "لجنة الفعاليات", "gender": "أنثى"}, {"nm": "أمجد ابراهيم", "cm": "لجنة شؤون الطلبة", "gender": "ذكر"}, {"nm": "فاطمة محمد", "cm": "لجنة شؤون الطلبة", "gender": "أنثى"}, {"nm": "يوسف سمير", "cm": "لجنة شؤون الطلبة", "gender": "ذكر"}, {"nm": "أسامه عمر", "cm": "لجنة شؤون الطلبة", "gender": "ذكر"}, {"nm": "عبدالعزيز ابراهيم", "cm": "لجنة شؤون الطلبة", "gender": "ذكر"}, {"nm": "غلا خالد", "cm": "لجنة شؤون الطلبة", "gender": "أنثى"}, {"nm": "عبدالاله سعد", "cm": "لجنة شؤون الطلبة", "gender": "ذكر"}, {"nm": "عبير كامل", "cm": "لجنة شؤون الطلبة", "gender": "ذكر"}, {"nm": "محمد سعيد", "cm": "لجنة الأنشطة الرياضية", "gender": "ذكر"}, {"nm": "عبدالرحمن حسن", "cm": "لجنة الأنشطة الرياضية", "gender": "ذكر"}, {"nm": "عبدالله فهد", "cm": "لجنة الأنشطة الرياضية", "gender": "ذكر"}, {"nm": "حسين بن", "cm": "لجنة الأنشطة الرياضية", "gender": "ذكر"}, {"nm": "فؤاد عبدالرحمن", "cm": "لجنة الأنشطة الرياضية", "gender": "ذكر"}, {"nm": "ايمن محمد", "cm": "لجنة الأنشطة الرياضية", "gender": "ذكر"}, {"nm": "جمانه بندر", "cm": "لجنة البرامج العلمية والمهنية", "gender": "أنثى"}, {"nm": "عبدالله علوي", "cm": "لجنة البرامج العلمية والمهنية", "gender": "ذكر"}, {"nm": "يزن عبدالله", "cm": "لجنة البرامج العلمية والمهنية", "gender": "ذكر"}, {"nm": "محمد تركي", "cm": "لجنة البرامج العلمية والمهنية", "gender": "ذكر"}, {"nm": "علي محمد", "cm": "لجنة البرامج العلمية والمهنية", "gender": "ذكر"}, {"nm": "عمر إبراهيم", "cm": "لجنة البرامج العلمية والمهنية", "gender": "ذكر"}, {"nm": "حنان عبدالله", "cm": "لجنة الاتصال المؤسسي", "gender": "أنثى"}, {"nm": "ريان بن", "cm": "لجنة الاتصال المؤسسي", "gender": "ذكر"}, {"nm": "خالد عصام", "cm": "لجنة الاتصال المؤسسي", "gender": "ذكر"}, {"nm": "عبدالرحمن خالد", "cm": "لجنة الاتصال المؤسسي", "gender": "ذكر"}, {"nm": "بشرى مطر", "cm": "لجنة الاتصال المؤسسي", "gender": "أنثى"}, {"nm": "عيسى عبدالله", "cm": "لجنة الاتصال المؤسسي", "gender": "ذكر"}, {"nm": "هدى حمدان", "cm": "لجنة الاتصال المؤسسي", "gender": "أنثى"}, {"nm": "ابراهيم صالح", "cm": "لجنة الاتصال المؤسسي", "gender": "ذكر"}, {"nm": "رضا ميثم", "cm": "لجنة الاتصال المؤسسي", "gender": "ذكر"}, {"nm": "عبدالرحمن عادل", "cm": "لجنة الاتصال المؤسسي", "gender": "ذكر"}, {"nm": "هاشم خالد", "cm": "اللجنة اللوجستية", "gender": "ذكر"}, {"nm": "سلطان وليد", "cm": "اللجنة اللوجستية", "gender": "ذكر"}, {"nm": "سعد خالد", "cm": "اللجنة اللوجستية", "gender": "ذكر"}, {"nm": "سلطان بدر", "cm": "اللجنة اللوجستية", "gender": "ذكر"}, {"nm": "فيصل جزاء", "cm": "اللجنة اللوجستية", "gender": "ذكر"}, {"nm": "سوسن سعيد", "cm": "لجنة الشؤون المالية", "gender": "أنثى"}, {"nm": "عبدالعزيز عيد", "cm": "لجنة الشؤون المالية", "gender": "ذكر"}, {"nm": "مروة عبدالله", "cm": "لجنة التقييم والجودة", "gender": "أنثى"}, {"nm": "رزان صالح", "cm": "لجنة التقييم والجودة", "gender": "أنثى"}, {"nm": "علي بن", "cm": "لجنة التقييم والجودة", "gender": "ذكر"}];
 const COMS_DATA=[{"id": "events", "ic": "🎪", "ar": "لجنة الفعاليات", "en": "Events Committee", "hAr": "حنين الرحيلي", "hEn": "Haneen Al-Rohaily", "depAr": "انمار بريسالي", "depEn": "Anmar Beresaly", "cm": "لجنة الفعاليات"}, {"id": "student", "ic": "🎓", "ar": "لجنة شؤون الطلبة", "en": "Student Affairs", "hAr": "أمجد أبو الخير", "hEn": "Amjad Abu Al-Khayr", "depAr": "فاطمة الحداد", "depEn": "Fatima Al-Haddad", "cm": "لجنة شؤون الطلبة"}, {"id": "sports", "ic": "⚽", "ar": "لجنة الأنشطة الرياضية", "en": "Sports & Recreation", "hAr": "محمد الغامدي", "hEn": "Mohammed Al-Ghamdi", "depAr": null, "depEn": null, "cm": "لجنة الأنشطة الرياضية"}, {"id": "academic", "ic": "🔬", "ar": "لجنة البرامج العلمية والمهنية", "en": "Academic Programs", "hAr": "أحمد الرويلي", "hEn": "Ahmed Al-Ruwaili", "depAr": null, "depEn": null, "cm": "لجنة البرامج العلمية والمهنية"}, {"id": "media", "ic": "📡", "ar": "لجنة الاتصال المؤسسي", "en": "Communications", "hAr": "عبدالرحمن الحربي", "hEn": "Abdulrahman Al-Harbi", "depAr": "حنان الزهراني", "depEn": "Hanan Al-Zahrani", "cm": "لجنة الاتصال المؤسسي"}, {"id": "logistics", "ic": "📦", "ar": "اللجنة اللوجستية", "en": "Logistics", "hAr": "سعد الشريف", "hEn": "Saad Al-Sharif", "depAr": null, "depEn": null, "cm": "اللجنة اللوجستية"}, {"id": "finance", "ic": "💰", "ar": "لجنة الشؤون المالية", "en": "Finance", "hAr": null, "hEn": null, "depAr": null, "depEn": null, "cm": "لجنة الشؤون المالية"}, {"id": "quality", "ic": "📊", "ar": "لجنة التقييم والجودة", "en": "Quality & Evaluation", "hAr": "علي المرحبي", "hEn": "Ali Al-Marhabi", "depAr": null, "depEn": null, "cm": "لجنة التقييم والجودة"}];
 function swTab(id,idx){
