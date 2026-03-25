@@ -1486,7 +1486,7 @@ function loadGalleryImages(folderId) {
 
   // إنشاء iframe مباشرةً من Google Drive
   var iframe = document.createElement('iframe');
-  iframe.src = 'https://drive.google.com/embeddedfolderview?id=' + folderId + '#grid';
+  iframe.src = 'https://drive.google.com/embeddedfolderview?id=' + folderId + '#list';
   iframe.style.cssText = 'width:100%;height:480px;border:none;border-radius:0 0 8px 8px;';
   iframe.title = 'معرض الصور';
   iframe.onload = function() {
@@ -1893,39 +1893,7 @@ function cDrwD() {
       }
     }
 
-    // الفعاليات المنتهية: أضف فعاليات الـ Sheet للأمام (دون حذف الثابتة)
-    if (past.length) {
-      var pastGrid = document.querySelector('#ev-past .past-cards-grid');
-      if (pastGrid) {
-        var newCards = past.map(function(p) {
-          var d = p.event_date ? new Date(p.event_date) : null;
-          var dateAr = d ? d.toLocaleDateString('ar-SA', {month:'long', year:'numeric'}) : '';
-          var pStats = {};
-          try { pStats = JSON.parse(p.notes || '{}'); } catch(e) {}
-          var galleryId = pStats.gallery_folder || '';
-          var safeTitle = (p.project_name || '').replace(/"/g, '&quot;');
-          var safeDate  = dateAr.replace(/"/g, '&quot;');
-          var clickAttr = galleryId
-            ? ' style="cursor:pointer" data-gid="' + galleryId + '" data-gtitle="' + safeTitle + '" data-gdate="' + safeDate + '" onclick="var el=this;openGallery(el.dataset.gid,el.dataset.gtitle,el.dataset.gdate)"'
-            : '';
-          return '<div class="past-card"' + clickAttr + '>' +
-            '<div class="pc-hdr" style="background:#2A7D42">' +
-              '<div class="pc-done" data-ar>✓ منتهية</div>' +
-              '<div class="pc-date" data-ar>' + dateAr + '</div>' +
-              '<div class="pc-name" data-ar>' + (p.project_name || '') + '</div>' +
-            '</div>' +
-            '<div class="pc-body">' +
-              '<div class="pc-row">' +
-                '<div class="pc-loc"><span class="pc-loc-ic">📍</span>' + (p.location || 'Melbourne') + '</div>' +
-                '<span class="pc-tag" style="background:#2A7D4222;color:#2A7D42" data-ar>' + (p.project_type || 'فعالية') + (galleryId ? ' 📷' : '') + '</span>' +
-              '</div>' +
-              (pStats.attendance ? '<div style="font-size:.75rem;font-weight:700;color:var(--g);margin-top:.4rem">👥 ' + pStats.attendance + ' حضور</div>' : '') +
-            '</div></div>';
-        }).join('');
-        // أضف الكروت الجديدة في البداية دون حذف الموجودة
-        pastGrid.insertAdjacentHTML('afterbegin', newCards);
-      }
-    }
+    // الفعاليات المنتهية تبقى كما هي في الـ HTML (لا تحديث من الـ API لتجنب التكرار)
   }
 
 
