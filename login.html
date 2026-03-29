@@ -17,7 +17,8 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 
 /* Header */
 .lc-header{background:linear-gradient(135deg,#0e3a1c,#1A5C2E);padding:2.5rem 2rem;text-align:center;}
-.lc-logo{width:72px;height:72px;border-radius:16px;background:rgba(255,255,255,.1);border:2px solid rgba(184,147,42,.4);margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-size:2rem;}
+.lc-logo{width:110px;height:110px;border-radius:50%;background:#fff;border:3px solid rgba(184,147,42,.5);margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.2);}
+.lc-logo img{width:90%;height:90%;object-fit:contain;}
 .lc-title{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.3rem;}
 .lc-sub{font-size:.75rem;color:rgba(255,255,255,.5);}
 
@@ -59,7 +60,7 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 
 <div class="login-card">
   <div class="lc-header">
-    <div class="lc-logo">🌿</div>
+    <div class="lc-logo"><img src="logo.png" alt="شعار النادي"/></div>
     <div class="lc-title">نادي الطلبة السعوديين في ملبورن</div>
     <div class="lc-sub">Saudi Students Association in Melbourne</div>
   </div>
@@ -100,11 +101,11 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 <script>
 'use strict';
 
-// ── USERS DB ─────────────────────────────────────────────────
-const USERS = [{"id": "MBR_LEAD_001", "name": "عبدالمحسن سادس", "role": "President", "username": "abdulmohsin", "pw": "SSAM@Pres2026", "access": "superadmin"}, {"id": "MBR_LEAD_002", "name": "عبدالله الدماعين", "role": "Vice President", "username": "abdullah.vp", "pw": "SSAM@VP2026", "access": "superadmin"}, {"id": "MBR_LEAD_003", "name": "روان العجمي", "role": "Deputy Vice President", "username": "rawan.dvp", "pw": "SSAM@DVP2026", "access": "superadmin"}, {"id": "MBR_HEAD_001", "name": "سعد الشريف", "role": "Committee Head", "username": "saad.log", "pw": "SSAM@Log2026", "access": "head"}, {"id": "MBR_HEAD_002", "name": "أمجد أبو الخير", "role": "Committee Head", "username": "amjad.stu", "pw": "SSAM@Stu2026", "access": "head"}, {"id": "MBR_HEAD_003", "name": "فاطمة الحداد", "role": "Committee Vice Head", "username": "fatima.stu", "pw": "SSAM@FH2026", "access": "head"}, {"id": "MBR_HEAD_004", "name": "محمد الغامدي", "role": "Committee Head", "username": "mohammed.spo", "pw": "SSAM@Spo2026", "access": "head"}, {"id": "MBR_HEAD_005", "name": "حنين الرحيلي", "role": "Committee Head", "username": "haneen.evt", "pw": "SSAM@Evt2026", "access": "head"}, {"id": "MBR_HEAD_006", "name": "انمار بريسالي", "role": "Committee Vice Head", "username": "anmar.evt", "pw": "SSAM@AB2026", "access": "head"}, {"id": "MBR_HEAD_007", "name": "أحمد الرويلي", "role": "Committee Head", "username": "ahmed.sci", "pw": "SSAM@Sci2026", "access": "head"}, {"id": "MBR_HEAD_008", "name": "عبدالرحمن الحربي", "role": "Committee Head", "username": "abdulrahman.com", "pw": "SSAM@Com2026", "access": "head"}, {"id": "MBR_HEAD_009", "name": "حنان الزهراني", "role": "Committee Vice Head", "username": "hanan.com", "pw": "SSAM@HZ2026", "access": "head"}, {"id": "MBR_HEAD_010", "name": "علي المرحبي", "role": "Committee Head", "username": "ali.qua", "pw": "SSAM@Qua2026", "access": "head"}];
+// ── API ───────────────────────────────────────────────────────
+const API = 'https://script.google.com/macros/s/AKfycbwx4prselle8g_6RjBD7PMnTwe70k_yq-1y4Xlv2SFWvO2PPpSMoBQ-ECvLzWq86Hwj/exec';
 
 // ── LOGIN LOGIC ──────────────────────────────────────────────
-function doLogin() {
+async function doLogin() {
   const username = document.getElementById('username').value.trim().toLowerCase();
   const password = document.getElementById('password').value;
 
@@ -117,25 +118,22 @@ function doLogin() {
   btn.disabled = true;
   btn.innerHTML = '<div class="spinner"></div>';
 
-  setTimeout(() => {
-    const user = USERS.find(u =>
-      u.username.toLowerCase() === username && u.pw === password
-    );
+  try {
+    const url = API + '?action=auth&username=' + encodeURIComponent(username) + '&password=' + encodeURIComponent(password);
+    const resp = await fetch(url);
+    const data = await resp.json();
 
-    if (user) {
-      // Save session
+    if (data && data.success && data.user) {
       const session = {
-        id:       user.id,
-        name:     user.name,
-        username: user.username,
-        role:     user.role,
-        access:   user.access,
+        id:       data.user.id,
+        name:     data.user.name,
+        username: data.user.username,
+        role:     data.user.role,
+        access:   data.user.access,
         loginAt:  new Date().toISOString(),
       };
       sessionStorage.setItem('ssam_session', JSON.stringify(session));
-      localStorage.setItem('ssam_last_user', user.username);
-
-      // Redirect to dashboard
+      localStorage.setItem('ssam_last_user', data.user.username);
       window.location.href = 'admin.html';
     } else {
       btn.disabled = false;
@@ -145,7 +143,11 @@ function doLogin() {
       void document.querySelector('.login-card').offsetWidth;
       document.querySelector('.login-card').classList.add('shake');
     }
-  }, 600);
+  } catch (e) {
+    btn.disabled = false;
+    btn.innerHTML = '<span id="login-btn-txt">تسجيل الدخول</span>';
+    showError('تعذّر الاتصال بالخادم، حاول مجدداً');
+  }
 }
 
 function showError(msg) {
